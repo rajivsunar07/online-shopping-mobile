@@ -15,6 +15,7 @@
         android:layout_height="150dp"
         android:layout_marginBottom="12dp"/>
 
+
     <TextView
         android:text="Register"
         android:textSize="32dp"
@@ -27,27 +28,31 @@
     <EditText
         android:id="@+id/etEmail"
         android:hint="Email Address"
+        android:layout_marginBottom="15dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
     <EditText
         android:id="@+id/etName"
         android:hint="Full Name / Organization name"
+        android:layout_marginBottom="15dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
     <EditText
         android:id="@+id/etPassword"
         android:hint="Password"
+        android:layout_marginBottom="15dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
     <EditText
         android:id="@+id/etConfirmPassword"
         android:hint="Confirm Password"
+        android:layout_marginBottom="15dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
     <Button
         android:id="@+id/btnRegister"
         android:text="Register"
-        android:backgroundTint="@color/black"
+        android:backgroundTint="#FF9800"
         android:layout_marginTop="32dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>

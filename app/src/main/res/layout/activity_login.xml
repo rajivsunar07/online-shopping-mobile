@@ -37,7 +37,7 @@
     <Button
         android:id="@+id/btLogin"
         android:text="Login"
-        android:backgroundTint="@color/black"
+        android:backgroundTint="#FF9800"
         android:layout_marginTop="32dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
