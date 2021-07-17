@@ -10,6 +10,7 @@ import android.widget.TextView
 class LoginActivity : AppCompatActivity() {
     private lateinit var etEmail: EditText
     private lateinit var etPassword: EditText
+    private lateinit var tvForgotPassword: TextView
     private lateinit var btnLogin: Button
     private lateinit var tvNoAccount: TextView
 
@@ -19,6 +20,7 @@ class LoginActivity : AppCompatActivity() {
 
         etEmail = findViewById(R.id.etEmail)
         etPassword = findViewById(R.id.etPassword)
+        tvForgotPassword = findViewById(R.id.tvForgotPassword)
         btnLogin = findViewById(R.id.btnLogin)
         tvNoAccount = findViewById(R.id.tvNoAccount)
 
