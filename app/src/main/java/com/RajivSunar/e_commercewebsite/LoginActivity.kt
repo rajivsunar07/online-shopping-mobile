@@ -21,13 +21,6 @@ class LoginActivity : AppCompatActivity() {
         btnLogin = findViewById(R.id.btnLogin)
         tvNoAccount = findViewById(R.id.tvNoAccount)
 
-        btnLogin.setOnClickListener {
-
-        }
-
-        tvNoAccount.setOnClickListener {
-
-        }
 
 
     }
