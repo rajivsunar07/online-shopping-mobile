@@ -20,6 +20,23 @@ abstract class UserDB : RoomDatabase() {
         @Volatile
         private var instance: UserDB? = null
 
+        //if null new instance is created otherwise same instance is used
+        fun getInstance(context: Context): UserDB {
+            if (instance == null) {
+                synchronized(UserDB::class) {
+                    instance=buildDatabase(context)
+                }
+            }
+            return instance!!
+        }
+        private fun buildDatabase(context: Context): UserDB {
+            return Room.databaseBuilder(
+                context.applicationContext,
+                UserDB::class.java,
+                "UserDB"
+            ).build()
+        }
+
     }
 
 }
