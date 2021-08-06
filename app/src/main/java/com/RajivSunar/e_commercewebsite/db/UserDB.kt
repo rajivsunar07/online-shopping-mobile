@@ -12,5 +12,8 @@ import com.RajivSunar.e_commercewebsite.entity.User
     version = 1
 )
 abstract class UserDB : RoomDatabase() {
+    //creating instance for UserDAO
+    abstract fun getUserDAO(): UserDAO
+
 
 }
