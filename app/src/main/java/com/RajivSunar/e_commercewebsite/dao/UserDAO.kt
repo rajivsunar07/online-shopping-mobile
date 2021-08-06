@@ -7,8 +7,6 @@ import com.RajivSunar.e_commercewebsite.entity.User
 
 @Dao
 interface UserDAO {
-    //suspend sync with the coroutines
-
     @Insert
     suspend fun registerUser(user: User)
 

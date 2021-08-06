@@ -7,6 +7,9 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import androidx.datastore.preferences.core.edit
+import androidx.datastore.preferences.core.stringPreferencesKey
+import androidx.datastore.preferences.createDataStore
 import com.RajivSunar.e_commercewebsite.db.UserDB
 import com.RajivSunar.e_commercewebsite.entity.User
 import kotlinx.coroutines.CoroutineScope
@@ -32,8 +35,7 @@ class LoginActivity : AppCompatActivity() {
         tvNoAccount = findViewById(R.id.tvNoAccount)
 
         btnLogin.setOnClickListener {
-            val intent = Intent(this, DashboardActivity::class.java)
-            startActivity(intent)
+            login()
         }
 
         tvNoAccount.setOnClickListener{
@@ -43,6 +45,7 @@ class LoginActivity : AppCompatActivity() {
 
 
     }
+
 
     private fun login() {
         val email = etEmail.text.toString()
@@ -60,7 +63,7 @@ class LoginActivity : AppCompatActivity() {
                         .show()
                 }
             } else {
-                saveUsernameAndPassword()
+                saveEmailAndPassword()
                 startActivity(
                     Intent(
                         this@LoginActivity,
@@ -72,8 +75,8 @@ class LoginActivity : AppCompatActivity() {
 
     }
 
-    private fun saveUsernameAndPassword() {
-        val sharedPreferences = getSharedPreferences("usernamePasswordPref", MODE_PRIVATE)
+    private fun saveEmailAndPassword() {
+        val sharedPreferences = getSharedPreferences("emailPasswordPref", MODE_PRIVATE)
         val editor = sharedPreferences.edit()
 
         editor.putString("email",etEmail.text.toString())
