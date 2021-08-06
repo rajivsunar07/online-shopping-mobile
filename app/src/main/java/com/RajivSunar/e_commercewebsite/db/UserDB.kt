@@ -15,5 +15,11 @@ abstract class UserDB : RoomDatabase() {
     //creating instance for UserDAO
     abstract fun getUserDAO(): UserDAO
 
+    //companion object us created so that it can be directly accessed
+    companion object {
+        @Volatile
+        private var instance: UserDB? = null
+
+    }
 
 }
