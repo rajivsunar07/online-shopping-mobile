@@ -7,6 +7,12 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import com.RajivSunar.e_commercewebsite.db.UserDB
+import com.RajivSunar.e_commercewebsite.entity.User
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var etEmail: EditText
@@ -35,6 +41,34 @@ class LoginActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+
+    }
+
+    private fun login() {
+        val email = etEmail.text.toString()
+        val password = etPassword.text.toString()
+
+        var user: User? = null
+        CoroutineScope(Dispatchers.IO).launch {
+            user = UserDB
+                .getInstance(this@LoginActivity)
+                .getUserDAO()
+                .checkUser(email, password)
+            if (user == null) {
+                withContext(Dispatchers.Main) {
+                    Toast.makeText(this@LoginActivity, "Invalid credentials", Toast.LENGTH_SHORT)
+                        .show()
+                }
+            } else {
+                saveUsernameAndPassword()
+                startActivity(
+                    Intent(
+                        this@LoginActivity,
+                        DashboardActivity::class.java
+                    )
+                )
+            }
+        }
 
     }
 
