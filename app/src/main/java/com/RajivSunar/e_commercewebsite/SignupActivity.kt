@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 
 class SignupActivity : AppCompatActivity() {
     private lateinit var etEmail: EditText
@@ -24,8 +25,7 @@ class SignupActivity : AppCompatActivity() {
         btnRegister = findViewById(R.id.btnRegister)
 
         btnRegister.setOnClickListener {
-            val intent = Intent(this, LoginActivity::class.java)
-            startActivity(intent)
+
         }
 
     }

@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var etEmail: EditText
@@ -36,4 +37,5 @@ class LoginActivity : AppCompatActivity() {
 
 
     }
+
 }
