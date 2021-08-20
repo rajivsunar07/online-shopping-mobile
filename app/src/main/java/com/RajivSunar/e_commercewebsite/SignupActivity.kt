@@ -8,9 +8,12 @@ import android.widget.EditText
 import android.widget.Toast
 import com.RajivSunar.e_commercewebsite.db.UserDB
 import com.RajivSunar.e_commercewebsite.entity.User
+import com.RajivSunar.e_commercewebsite.repository.UserRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class SignupActivity : AppCompatActivity() {
     private lateinit var etEmail: EditText
@@ -42,14 +45,31 @@ class SignupActivity : AppCompatActivity() {
             }else{
                 val user = User(email, name, password)
                 CoroutineScope(Dispatchers.IO).launch {
-                    UserDB.getInstance(this@SignupActivity).getUserDAO().registerUser(user)
+//                    UserDB.getInstance(this@SignupActivity).getUserDAO().registerUser(user)
+                    try {
+                        val repository = UserRepository()
+                        val response = repository.register(user)
+                        if(response.success == true){
+                            withContext(Main){
+                                Toast.makeText(this@SignupActivity, "User registered successfully", Toast.LENGTH_SHORT).show()
+                            }
+                            val intent = Intent(this@SignupActivity, LoginActivity::class.java)
+                            startActivity(
+                                intent
+                            )
+                        }
+                    }catch(ex: Exception){
+                        withContext(Main){
+                            Toast.makeText(this@SignupActivity, ex.toString(), Toast.LENGTH_SHORT).show()
+                        }
+                    }
                 }
-                Toast.makeText(this, "User registered", Toast.LENGTH_SHORT).show()
-                startActivity(
-                    Intent(
-                        this, LoginActivity::class.java
-                    )
-                )
+//                Toast.makeText(this, "User registered", Toast.LENGTH_SHORT).show()
+//                startActivity(
+//                    Intent(
+//                        this, LoginActivity::class.java
+//                    )
+//                )
             }
 
         }
