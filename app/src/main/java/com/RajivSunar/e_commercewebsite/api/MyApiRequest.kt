@@ -5,12 +5,12 @@ import org.json.JSONObject
 import retrofit2.Response
 import java.io.IOException
 
-class MyApiRequest {
-    suspend fun <T> apiRequest(call: suspend() -> Response<T>): T? {
+open class MyApiRequest {
+    suspend fun <T> apiRequest(call: suspend() -> Response<T>): T {
         val response = call.invoke()
 
         if(response.isSuccessful){
-            return response.body()
+            return response.body()!!
         }else{
             val error = response.errorBody()?.string()
             val message = StringBuilder()
