@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.RajivSunar.e_commercewebsite.R
 import com.RajivSunar.e_commercewebsite.entity.Product
 import com.bumptech.glide.Glide
-import com.bumptech.glide.annotation.GlideModule
 
 
 class ProductAdapter(

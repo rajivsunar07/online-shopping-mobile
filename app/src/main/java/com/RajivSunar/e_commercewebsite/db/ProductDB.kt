@@ -6,7 +6,6 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.RajivSunar.e_commercewebsite.dao.ProductDAO
 import com.RajivSunar.e_commercewebsite.entity.Product
-import com.RajivSunar.e_commercewebsite.entity.User
 
 @Database(
     entities = [(Product::class)],

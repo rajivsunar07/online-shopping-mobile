@@ -10,7 +10,6 @@ import com.RajivSunar.e_commercewebsite.adapter.ProductAdapter
 import com.RajivSunar.e_commercewebsite.db.ProductDB
 import com.RajivSunar.e_commercewebsite.entity.Product
 import com.RajivSunar.e_commercewebsite.repository.ProductRepository
-import com.RajivSunar.e_commercewebsite.repository.UserRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -33,7 +32,6 @@ class ProductActivity : AppCompatActivity() {
 
     fun displayAll(){
         CoroutineScope(Dispatchers.IO).launch {
-//            ProductDB.getInstance(this@ProductActivity).getProductDAO().registerUser(user)
             try {
                 var dbproducts = ProductDB
                     .getInstance(this@ProductActivity)
@@ -75,7 +73,6 @@ class ProductActivity : AppCompatActivity() {
                         productRecyclerView.layoutManager =
                             LinearLayoutManager(this@ProductActivity)
                         productRecyclerView.adapter = adapter
-//                        ProductDB.getInstance(this@ProductActivity).getProductDAO().insert()
                     }
 
                 }
