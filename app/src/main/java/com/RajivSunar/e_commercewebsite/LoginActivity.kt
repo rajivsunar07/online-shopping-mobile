@@ -84,7 +84,7 @@ class LoginActivity : AppCompatActivity() {
                     ServiceBuilder.token = "Bearer ${response.token}"
 
                     startActivity(
-                        Intent(this@LoginActivity, DashboardActivity::class.java)
+                        Intent(this@LoginActivity, ProductActivity::class.java)
                     )
                     finish()
                 }else{
