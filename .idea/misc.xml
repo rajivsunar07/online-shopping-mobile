@@ -3,8 +3,21 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="app/src/main/res/layout/activity_product.xml" value="0.3281994745603629" />
-        <entry key="app/src/main/res/layout/product_design.xml" value="0.2541676786504481" />
+        <entry key="app/src/main/res/drawable/border.xml" value="0.2851851851851852" />
+        <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.165625" />
+        <entry key="app/src/main/res/drawable/layout_bg.xml" value="0.2851851851851852" />
+        <entry key="app/src/main/res/drawable/side_nav_bar.xml" value="0.16875" />
+        <entry key="app/src/main/res/layout/activity_dashboard.xml" value="0.25092592592592594" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.15260416666666668" />
+        <entry key="app/src/main/res/layout/activity_nav.xml" value="0.28229166666666666" />
+        <entry key="app/src/main/res/layout/activity_product.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/content_cart.xml" value="0.28229166666666666" />
+        <entry key="app/src/main/res/layout/fragment_second.xml" value="0.28229166666666666" />
+        <entry key="app/src/main/res/layout/product_card.xml" value="0.28229166666666666" />
+        <entry key="app/src/main/res/layout/product_design.xml" value="0.24726854283634428" />
+        <entry key="app/src/main/res/menu/activity_main_drawer.xml" value="0.28229166666666666" />
+        <entry key="app/src/main/res/menu/nav.xml" value="0.28229166666666666" />
+        <entry key="app/src/main/res/menu/navigation_menu.xml" value="0.28229166666666666" />
       </map>
     </option>
   </component>
