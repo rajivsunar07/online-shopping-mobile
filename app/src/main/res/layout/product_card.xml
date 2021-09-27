@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="550px"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="2dp"
+    android:layout_margin="2dp">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="545px"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="210dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <View style="@style/Divider.Horizontal" />
+
+            <View style="@style/Divider.Horizontal" />
+
+            <ImageView
+                android:id="@+id/imgProduct"
+                android:layout_width="match_parent"
+                android:layout_height="206dp" />
+
+            <View style="@style/Divider.Horizontal" />
+
+            <View style="@style/Divider.Horizontal" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:padding="12dp">
+
+                <TextView
+                    android:id="@+id/tvName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:text="Name"
+                    android:textColor="@color/black"
+                    android:textSize="18dp"
+                    android:textStyle="bold" />
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/tvPrice"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:paddingLeft="12dp"
+                android:text="Price"
+                android:textColor="#008a19"
+                android:textSize="16dp" />
+
+            <Button
+                android:id="@+id/btnAddTocart"
+                android:text="Add to cart"
+                android:backgroundTint="#F6B83B"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="4dp"
+                />
+
+            <View style="@style/Divider.Horizontal" />
+
+
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</LinearLayout>
