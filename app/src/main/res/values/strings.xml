@@ -3,4 +3,7 @@
     <string name="no_account">No account? <u><font color="#0000FF">Sign Up</font></u></string>
     <string name="forgot_password"><u><font color="#0000FF">Forgot password</font></u></string>
     <string name="button_name">Customer <br>complaints</br></string>
+
+    <string name="open">Open</string>
+    <string name="close">Close</string>
 </resources>
