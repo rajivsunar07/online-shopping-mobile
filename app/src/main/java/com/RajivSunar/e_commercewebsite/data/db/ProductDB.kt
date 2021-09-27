@@ -1,16 +1,19 @@
-package com.RajivSunar.e_commercewebsite.db
+package com.RajivSunar.e_commercewebsite.data.db
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.RajivSunar.e_commercewebsite.dao.ProductDAO
-import com.RajivSunar.e_commercewebsite.entity.Product
+import androidx.room.TypeConverters
+import com.RajivSunar.e_commercewebsite.data.dao.ProductDAO
+import com.RajivSunar.e_commercewebsite.data.entity.Converters
+import com.RajivSunar.e_commercewebsite.data.entity.Product
 
 @Database(
     entities = [(Product::class)],
     version = 1
 )
+@TypeConverters(Converters::class)
 abstract class ProductDB : RoomDatabase() {
     //creating instance for ProductDAO
     abstract fun getProductDAO(): ProductDAO
