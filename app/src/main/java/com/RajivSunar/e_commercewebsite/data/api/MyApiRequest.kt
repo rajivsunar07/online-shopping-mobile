@@ -1,4 +1,4 @@
-package com.RajivSunar.e_commercewebsite.api
+package com.RajivSunar.e_commercewebsite.data.api
 
 import org.json.JSONException
 import org.json.JSONObject

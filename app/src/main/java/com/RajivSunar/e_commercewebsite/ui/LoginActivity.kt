@@ -1,4 +1,4 @@
-package com.RajivSunar.e_commercewebsite
+package com.RajivSunar.e_commercewebsite.ui
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -8,19 +8,13 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
-import androidx.datastore.preferences.core.edit
-import androidx.datastore.preferences.core.stringPreferencesKey
-import androidx.datastore.preferences.createDataStore
-import com.RajivSunar.e_commercewebsite.api.ServiceBuilder
-import com.RajivSunar.e_commercewebsite.db.UserDB
-import com.RajivSunar.e_commercewebsite.entity.User
-import com.RajivSunar.e_commercewebsite.repository.UserRepository
-import com.google.android.material.snackbar.Snackbar
+import com.RajivSunar.e_commercewebsite.R
+import com.RajivSunar.e_commercewebsite.data.api.ServiceBuilder
+import com.RajivSunar.e_commercewebsite.data.repository.UserRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import okhttp3.Dispatcher
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var etEmail: EditText

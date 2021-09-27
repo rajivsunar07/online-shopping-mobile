@@ -1,11 +1,12 @@
-package com.RajivSunar.e_commercewebsite
+package com.RajivSunar.e_commercewebsite.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.RajivSunar.e_commercewebsite.R
 
-class DashboardActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_dashboard)
+        setContentView(R.layout.activity_main)
     }
 }
