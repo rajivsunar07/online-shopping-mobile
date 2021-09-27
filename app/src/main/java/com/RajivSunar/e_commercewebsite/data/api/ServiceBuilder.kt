@@ -1,4 +1,4 @@
-package com.RajivSunar.e_commercewebsite.api
+package com.RajivSunar.e_commercewebsite.data.api
 
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -7,10 +7,11 @@ import java.util.concurrent.TimeUnit
 
 object ServiceBuilder {
 
-    private const val BASE_URL = "http://10.0.2.2:5000/"
-    var token: String? = null
+    var BASE_URL = "http://10.0.2.2:5000/"
+    var  token: String? = null
 
     var okHttpClient = OkHttpClient.Builder()
+        .addInterceptor(MyInterceptor())
         .connectTimeout(1, TimeUnit.MINUTES)
         .readTimeout(30, TimeUnit.SECONDS)
         .writeTimeout(15, TimeUnit.SECONDS)
