@@ -1,4 +1,4 @@
-package com.RajivSunar.e_commercewebsite
+package com.RajivSunar.e_commercewebsite.ui
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -6,9 +6,9 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
-import com.RajivSunar.e_commercewebsite.db.UserDB
-import com.RajivSunar.e_commercewebsite.entity.User
-import com.RajivSunar.e_commercewebsite.repository.UserRepository
+import com.RajivSunar.e_commercewebsite.R
+import com.RajivSunar.e_commercewebsite.data.entity.User
+import com.RajivSunar.e_commercewebsite.data.repository.UserRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Dispatchers.Main

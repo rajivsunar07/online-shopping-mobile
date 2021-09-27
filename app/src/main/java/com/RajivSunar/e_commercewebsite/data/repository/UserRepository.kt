@@ -1,10 +1,10 @@
-package com.RajivSunar.e_commercewebsite.repository
+package com.RajivSunar.e_commercewebsite.data.repository
 
-import com.RajivSunar.e_commercewebsite.api.MyApiRequest
-import com.RajivSunar.e_commercewebsite.api.ServiceBuilder
-import com.RajivSunar.e_commercewebsite.api.UserAPI
-import com.RajivSunar.e_commercewebsite.entity.User
-import com.RajivSunar.e_commercewebsite.response.UserResponse
+import com.RajivSunar.e_commercewebsite.data.api.MyApiRequest
+import com.RajivSunar.e_commercewebsite.data.api.ServiceBuilder
+import com.RajivSunar.e_commercewebsite.data.api.UserAPI
+import com.RajivSunar.e_commercewebsite.data.entity.User
+import com.RajivSunar.e_commercewebsite.data.response.UserResponse
 
 class UserRepository: MyApiRequest() {
     private val userApi =

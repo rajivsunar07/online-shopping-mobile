@@ -1,11 +1,11 @@
-package com.RajivSunar.e_commercewebsite.db
+package com.RajivSunar.e_commercewebsite.data.db
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.RajivSunar.e_commercewebsite.dao.UserDAO
-import com.RajivSunar.e_commercewebsite.entity.User
+import com.RajivSunar.e_commercewebsite.data.dao.UserDAO
+import com.RajivSunar.e_commercewebsite.data.entity.User
 
 @Database(
     entities = [(User::class)],

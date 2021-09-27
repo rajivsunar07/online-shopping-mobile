@@ -1,7 +1,5 @@
-package com.RajivSunar.e_commercewebsite.entity
+package com.RajivSunar.e_commercewebsite.data.entity
 
-import android.os.Parcel
-import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
@@ -12,5 +10,5 @@ data class User(
     var password: String? = null
 ) {
     @PrimaryKey(autoGenerate = true)
-    var userId: Int = 0
+    var _id: Int = 0
 }

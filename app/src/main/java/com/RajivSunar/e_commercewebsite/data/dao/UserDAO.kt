@@ -1,9 +1,9 @@
-package com.RajivSunar.e_commercewebsite.dao
+package com.RajivSunar.e_commercewebsite.data.dao
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
-import com.RajivSunar.e_commercewebsite.entity.User
+import com.RajivSunar.e_commercewebsite.data.entity.User
 
 @Dao
 interface UserDAO {

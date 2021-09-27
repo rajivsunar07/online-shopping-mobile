@@ -1,7 +1,7 @@
-package com.RajivSunar.e_commercewebsite.api
+package com.RajivSunar.e_commercewebsite.data.api
 
-import com.RajivSunar.e_commercewebsite.entity.User
-import com.RajivSunar.e_commercewebsite.response.UserResponse
+import com.RajivSunar.e_commercewebsite.data.entity.User
+import com.RajivSunar.e_commercewebsite.data.response.UserResponse
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.Field
