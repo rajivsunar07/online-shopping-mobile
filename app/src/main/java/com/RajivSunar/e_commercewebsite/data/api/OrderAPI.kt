@@ -1,14 +1,13 @@
 package com.RajivSunar.e_commercewebsite.data.api
 
 import com.RajivSunar.e_commercewebsite.data.response.OrderResponse
-import com.RajivSunar.e_commercewebsite.data.response.UserResponse
 import retrofit2.Response
 import retrofit2.http.*
 
 interface OrderAPI {
-
-    @GET("order/")
-    suspend fun getAll(): Response<OrderResponse>
+//
+//    @GET("order/")
+//    suspend fun getAll(): Response<OrderResponse>
 
     @FormUrlEncoded
     @POST("order/")
@@ -23,4 +22,11 @@ interface OrderAPI {
 
     @GET("order/")
     suspend fun getCart(): Response<OrderResponse>
+
+    @FormUrlEncoded
+    @PATCH("order/{id}")
+    suspend fun updateOrder(
+        @Path("id") id: String,
+        @Field("status") status: String
+    ): Response<OrderResponse>
 }
