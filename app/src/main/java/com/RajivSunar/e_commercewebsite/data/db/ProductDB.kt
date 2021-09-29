@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.RajivSunar.e_commercewebsite.data.dao.ProductDAO
-import com.RajivSunar.e_commercewebsite.data.entity.Converters
+import com.RajivSunar.e_commercewebsite.data.entity.converters.Converters
 import com.RajivSunar.e_commercewebsite.data.entity.Product
 
 @Database(

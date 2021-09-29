@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/drawerlayout"
-    tools:context=".ui.ProductActivity">
+    tools:context=".ui.product.ProductActivity">
 
 
 

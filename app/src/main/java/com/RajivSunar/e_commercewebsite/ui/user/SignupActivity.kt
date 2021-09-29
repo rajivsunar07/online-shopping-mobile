@@ -1,4 +1,4 @@
-package com.RajivSunar.e_commercewebsite.ui
+package com.RajivSunar.e_commercewebsite.ui.user
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity

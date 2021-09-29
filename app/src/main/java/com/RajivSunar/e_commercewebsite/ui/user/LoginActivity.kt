@@ -1,4 +1,4 @@
-package com.RajivSunar.e_commercewebsite.ui
+package com.RajivSunar.e_commercewebsite.ui.user
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -11,6 +11,7 @@ import android.widget.Toast
 import com.RajivSunar.e_commercewebsite.R
 import com.RajivSunar.e_commercewebsite.data.api.ServiceBuilder
 import com.RajivSunar.e_commercewebsite.data.repository.UserRepository
+import com.RajivSunar.e_commercewebsite.ui.product.ProductActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
