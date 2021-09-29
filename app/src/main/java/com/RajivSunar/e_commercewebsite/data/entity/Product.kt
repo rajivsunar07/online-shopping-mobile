@@ -1,13 +1,7 @@
 package com.RajivSunar.e_commercewebsite.data.entity
 
-import android.widget.Toast
 import androidx.room.*
-import com.RajivSunar.e_commercewebsite.ui.ProductActivity
 import org.jetbrains.annotations.NotNull
-import com.google.gson.Gson
-import com.google.gson.GsonBuilder
-import com.google.gson.reflect.TypeToken
-import java.util.*
 import kotlin.collections.ArrayList
 
 @Entity(indices = [Index(value = ["_id"], unique = true)])
