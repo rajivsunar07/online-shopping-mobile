@@ -1,10 +1,12 @@
 package com.RajivSunar.e_commercewebsite.data.dao
 
+import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.RajivSunar.e_commercewebsite.data.entity.OrderItem
 
+@Dao
 interface OrderItemDAO {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
