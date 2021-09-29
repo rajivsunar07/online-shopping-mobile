@@ -4,8 +4,11 @@ import com.RajivSunar.e_commercewebsite.data.api.MyApiRequest
 import com.RajivSunar.e_commercewebsite.data.api.ProductAPI
 import com.RajivSunar.e_commercewebsite.data.api.ServiceBuilder
 import com.RajivSunar.e_commercewebsite.data.response.ProductResponse
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import retrofit2.http.Part
 
-class ProductRepository: MyApiRequest() {
+class ProductRepository : MyApiRequest() {
     private val productApi =
         ServiceBuilder.buildService(ProductAPI::class.java)
 
@@ -15,5 +18,34 @@ class ProductRepository: MyApiRequest() {
         }
     }
 
+    suspend fun getOne(id: String): ProductResponse {
+        return apiRequest {
+            productApi.getOne(id)
+        }
+    }
+
+    suspend fun getForUser(): ProductResponse {
+        return apiRequest {
+            productApi.getForUser()
+        }
+    }
+
+    suspend fun addProduct(
+        image: ArrayList<MultipartBody.Part>,
+        name: RequestBody,
+        description: RequestBody,
+        price: Int,
+        _for: RequestBody
+    ): ProductResponse {
+        return apiRequest {
+            productApi.addProduct(
+                image,
+                name,
+                description,
+                price,
+                _for
+            )
+        }
+    }
 
 }
