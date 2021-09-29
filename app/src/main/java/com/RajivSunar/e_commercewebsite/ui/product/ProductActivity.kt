@@ -1,4 +1,4 @@
-package com.RajivSunar.e_commercewebsite.ui
+package com.RajivSunar.e_commercewebsite.ui.product
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -14,6 +14,8 @@ import com.RajivSunar.e_commercewebsite.ui.adapter.ProductAdapter
 import com.RajivSunar.e_commercewebsite.data.db.ProductDB
 import com.RajivSunar.e_commercewebsite.data.entity.Product
 import com.RajivSunar.e_commercewebsite.data.repository.ProductRepository
+import com.RajivSunar.e_commercewebsite.ui.order.CartActivity
+import com.RajivSunar.e_commercewebsite.ui.user.LoginActivity
 import com.google.android.material.navigation.NavigationView
 //import com.google.android.material.navigation.NavigationView
 import kotlinx.coroutines.CoroutineScope
@@ -53,7 +55,6 @@ class ProductActivity : AppCompatActivity(), NavigationView.OnNavigationItemSele
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if(mToggle.onOptionsItemSelected(item)){
-            Toast.makeText(this@ProductActivity, item.toString(), Toast.LENGTH_SHORT).show()
             return true
         }
         return false
@@ -123,10 +124,27 @@ class ProductActivity : AppCompatActivity(), NavigationView.OnNavigationItemSele
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        val intent = Intent(this@ProductActivity, LoginActivity::class.java)
-        startActivity(
-            intent
-        )
+        if(item.itemId == R.id.nav_cart){
+            val intent = Intent(this@ProductActivity, CartActivity::class.java)
+            startActivity(
+                intent
+            )
+        }else if(item.itemId == R.id.nav_login) {
+            val intent = Intent(this@ProductActivity, LoginActivity::class.java)
+            startActivity(
+                intent
+            )
+        }else if(item.itemId == R.id.nav_my_products) {
+            val intent = Intent(this@ProductActivity, MyProductsActivity::class.java)
+            startActivity(
+                intent
+            )
+        }else if(item.itemId == R.id.nav_create_product) {
+            val intent = Intent(this@ProductActivity, CreateProductActivity::class.java)
+            startActivity(
+                intent
+            )
+        }
         return true
     }
 
