@@ -2,6 +2,7 @@ package com.RajivSunar.e_commercewebsite.data.entity
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import org.jetbrains.annotations.NotNull
 
 @Entity
 data class User(
@@ -9,6 +10,7 @@ data class User(
     var name: String? = null,
     var password: String? = null
 ) {
-    @PrimaryKey(autoGenerate = true)
-    var _id: Int = 0
+    @PrimaryKey(autoGenerate = false)
+    @NotNull
+    var _id: String = ""
 }
