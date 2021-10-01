@@ -1,6 +1,7 @@
 package com.RajivSunar.e_commercewebsite.ui.adapter
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +14,8 @@ import com.RajivSunar.e_commercewebsite.R
 import com.RajivSunar.e_commercewebsite.data.api.ServiceBuilder
 import com.RajivSunar.e_commercewebsite.data.entity.Product
 import com.RajivSunar.e_commercewebsite.data.repository.OrderRepository
+import com.RajivSunar.e_commercewebsite.data.repository.ProductRepository
+import com.RajivSunar.e_commercewebsite.ui.product.UpdateProductActivity
 import com.bumptech.glide.Glide
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -54,31 +57,35 @@ class MyProductsAdapter(
             holder.tvPrice.text = "RS. " + product.price.toString()
             holder.tvDescription.text =  product.description.toString()
 
-//            holder.btnUpdate.setOnClickListener {
-//
-//                CoroutineScope(Dispatchers.IO).launch {
-//                    try {
-//                        val repository = OrderRepository()
-//                        val response = repository.addToCart(
-//                            product._id,
-//                            1,
-//                            product.price!!,
-//                            product.user!!,
-//                            null,
-//                            "sell"
-//                        )
-//                        if(response.success == true){
-//                            withContext(Dispatchers.Main){
-//                                Toast.makeText(context, response.message, Toast.LENGTH_SHORT).show()
-//                            }
-//                        }
-//                    }catch(ex: Exception){
-//                        withContext(Dispatchers.Main){
-//                            Toast.makeText(context, ex.toString(), Toast.LENGTH_SHORT).show()
-//                        }
-//                    }
-//                }
-//            }
+            holder.btnUpdate.setOnClickListener {
+                val intent = Intent(this.context, UpdateProductActivity::class.java)
+                intent.putExtra("id", product._id)
+                this.context.startActivity(
+                    intent
+                )
+            }
+
+
+            holder.btnDelete.setOnClickListener {
+
+                CoroutineScope(Dispatchers.IO).launch {
+                    try {
+                        val repository = ProductRepository()
+                        val response = repository.deleteProduct(
+                            product._id
+                        )
+                        if(response.success == true){
+                            withContext(Dispatchers.Main){
+                                Toast.makeText(context, response.message, Toast.LENGTH_SHORT).show()
+                            }
+                        }
+                    }catch(ex: Exception){
+                        withContext(Dispatchers.Main){
+                            Toast.makeText(context, ex.toString(), Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                }
+            }
         }
 
     }
