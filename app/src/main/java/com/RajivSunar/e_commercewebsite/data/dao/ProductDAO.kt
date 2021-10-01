@@ -1,9 +1,6 @@
 package com.RajivSunar.e_commercewebsite.data.dao
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import com.RajivSunar.e_commercewebsite.data.entity.Product
 
 @Dao
@@ -16,5 +13,7 @@ interface ProductDAO {
 
     @Query("Select count(*) from Product")
     suspend fun getCount(): Int?
+
+
 
 }
