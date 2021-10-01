@@ -1,19 +1,24 @@
 package com.RajivSunar.e_commercewebsite.ui.product
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
+import android.text.TextUtils
+import android.widget.*
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.RajivSunar.e_commercewebsite.R
 import com.RajivSunar.e_commercewebsite.data.api.ServiceBuilder
 import com.RajivSunar.e_commercewebsite.data.db.ProductDB
+import com.RajivSunar.e_commercewebsite.data.entity.Comment
 import com.RajivSunar.e_commercewebsite.data.entity.Product
+import com.RajivSunar.e_commercewebsite.data.repository.CommentRepository
 import com.RajivSunar.e_commercewebsite.data.repository.OrderRepository
 import com.RajivSunar.e_commercewebsite.data.repository.ProductRepository
+import com.RajivSunar.e_commercewebsite.ui.adapter.CommentAdapter
+import com.RajivSunar.e_commercewebsite.ui.adapter.MyProductsAdapter
 import com.RajivSunar.e_commercewebsite.ui.adapter.ProductAdapter
+import com.RajivSunar.e_commercewebsite.ui.exchangeproduct.ExchangeProductCreateActivity
 import com.bumptech.glide.Glide
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -26,6 +31,13 @@ class ProductDetailActivity : AppCompatActivity() {
     private lateinit var tvPrice: TextView
     private lateinit var tvDescription: TextView
     private lateinit var btnAddTocart: Button
+    private lateinit var rvComment: RecyclerView
+    private lateinit var etComment: EditText
+    private lateinit var btnComment: Button
+    private lateinit var btnRequestExchange: Button
+
+
+    var lstComment = ArrayList<Comment>()
 
     var product = Product()
 
@@ -38,13 +50,37 @@ class ProductDetailActivity : AppCompatActivity() {
         tvPrice = findViewById(R.id.tvPrice)
         tvDescription = findViewById(R.id.tvDescription)
         btnAddTocart = findViewById(R.id.btnAddTocart)
+        rvComment = findViewById(R.id.rvComment)
+        etComment = findViewById(R.id.etComment)
+        btnComment = findViewById(R.id.btnComment)
+        btnRequestExchange = findViewById(R.id.btnRequestExchange)
 
         val id = intent.getStringExtra("id").toString()
 
         getProductDetails(id)
 
+        getComment(id)
+
         btnAddTocart.setOnClickListener {
             addToCart()
+        }
+
+        btnComment.setOnClickListener {
+            if(TextUtils.isEmpty(etComment.text)){
+                etComment.error = "Add a comment"
+                etComment.requestFocus()
+                return@setOnClickListener
+            }
+            comment()
+        }
+
+        btnRequestExchange.setOnClickListener {
+            val intent = Intent(this@ProductDetailActivity, ExchangeProductCreateActivity::class.java)
+            intent.putExtra("exchangeFor",product._id )
+            intent.putExtra("seller",product.user )
+            startActivity(
+                intent
+            )
         }
     }
 
@@ -58,7 +94,9 @@ class ProductDetailActivity : AppCompatActivity() {
                     withContext(Dispatchers.Main){
                         product = response.result?.get(0)!!
 
+                        Toast.makeText(this@ProductDetailActivity, product.toString(), Toast.LENGTH_SHORT).show()
                         if (product != null) {
+                            Toast.makeText(this@ProductDetailActivity, product.toString(), Toast.LENGTH_SHORT).show()
                             Glide.with(this@ProductDetailActivity)
                                 .load(ServiceBuilder.BASE_URL + product.image!![0])
                                 .into(imgProduct)
@@ -67,6 +105,37 @@ class ProductDetailActivity : AppCompatActivity() {
                             tvPrice.text = product.price.toString()
                             tvDescription.text = product.description
                         }
+                    }
+
+
+                }
+            }catch(ex: Exception){
+                withContext(Dispatchers.Main){
+                    Toast.makeText(this@ProductDetailActivity, ex.toString(), Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
+
+    fun getComment(id: String) {
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val repository = CommentRepository()
+                val response = repository.getAll(id)
+                if(response.success == true){
+                    withContext(Dispatchers.Main){
+                        val data = response.result
+
+                        if (data != null) {
+                            for(comment in data){
+                                lstComment.add(comment)
+                            }
+
+                        }
+                        val adapter = CommentAdapter(lstComment, this@ProductDetailActivity)
+                        rvComment.layoutManager =
+                            LinearLayoutManager(this@ProductDetailActivity)
+                        rvComment.adapter = adapter
                     }
 
 
@@ -90,6 +159,27 @@ class ProductDetailActivity : AppCompatActivity() {
                     product.user!!,
                     null,
                     "sell"
+                )
+                if(response.success == true){
+                    withContext(Dispatchers.Main){
+                        Toast.makeText(this@ProductDetailActivity, response.message, Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }catch(ex: Exception){
+                withContext(Dispatchers.Main){
+                    Toast.makeText(this@ProductDetailActivity, ex.toString(), Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
+
+    fun comment() {
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val repository = CommentRepository()
+                val response = repository.addCommment(
+                    product._id,
+                    etComment.text.toString()
                 )
                 if(response.success == true){
                     withContext(Dispatchers.Main){
