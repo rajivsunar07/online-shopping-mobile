@@ -3,35 +3,101 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="horizontal"
+    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/imgItem"
+            android:layout_width="wrap_content"
+            android:layout_height="97dp"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/ic_image"
+            tools:ignore="VectorDrawableCompat" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/btnDecrease"
+                android:text="-"
+                android:textSize="40dp"
+                android:layout_marginRight="5dp"
+                android:layout_gravity="center_vertical"
+                android:layout_width="30dp"
+                android:padding="0dp"
+                android:layout_height="wrap_content"
+                tools:ignore="RtlCompat" />
+
+            <TextView
+                android:id="@+id/tvQuantity"
+                android:layout_width="wrap_content"
+                android:layout_height="96dp"
+                android:layout_weight="1"
+                android:textAlignment="center"
+                android:gravity="center"
+                android:text="TextView" />
+            <Button
+                android:id="@+id/btnIncrease"
+                android:text="+"
+                android:textSize="40dp"
+                android:layout_marginLeft="5dp"
+                android:layout_gravity="center_vertical"
+                android:layout_width="30dp"
+                android:padding="0dp"
+                android:layout_height="wrap_content"/>
 
 
-    <ImageView
-        android:id="@+id/imgItem"
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/tvPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="96dp"
+            android:layout_weight="1"
+            android:textAlignment="center"
+            android:gravity="center"
+            android:text="TextView" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/exchangeLayout"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:text="Exchange For: "
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/tvExchangeProduct"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <ImageView
+            android:id="@+id/imgExchangeProduct"
+            android:layout_width="wrap_content"
+            android:layout_height="80dp"/>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnDelete"
+        android:text="Remove"
+        android:layout_gravity="end"
         android:layout_width="wrap_content"
-        android:layout_height="97dp"
-        android:layout_weight="1"
-        app:srcCompat="@drawable/ic_image"
-        tools:ignore="VectorDrawableCompat" />
+        android:layout_height="wrap_content"/>
 
-    <TextView
-        android:id="@+id/tvQuantity"
-        android:layout_width="wrap_content"
-        android:layout_height="96dp"
-        android:layout_weight="1"
-        android:textAlignment="center"
-        android:gravity="center"
-        android:text="TextView" />
-
-    <TextView
-        android:id="@+id/tvPrice"
-        android:layout_width="wrap_content"
-        android:layout_height="96dp"
-        android:layout_weight="1"
-        android:textAlignment="center"
-        android:gravity="center"
-        android:text="TextView" />
 
 </LinearLayout>
