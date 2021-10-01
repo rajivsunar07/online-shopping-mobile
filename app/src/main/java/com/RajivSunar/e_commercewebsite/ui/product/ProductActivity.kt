@@ -10,12 +10,15 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.RajivSunar.e_commercewebsite.R
+import com.RajivSunar.e_commercewebsite.data.api.ServiceBuilder
 import com.RajivSunar.e_commercewebsite.ui.adapter.ProductAdapter
 import com.RajivSunar.e_commercewebsite.data.db.ProductDB
 import com.RajivSunar.e_commercewebsite.data.entity.Product
 import com.RajivSunar.e_commercewebsite.data.repository.ProductRepository
+import com.RajivSunar.e_commercewebsite.ui.exchangeproduct.ExchangeProductActivity
 import com.RajivSunar.e_commercewebsite.ui.order.CartActivity
 import com.RajivSunar.e_commercewebsite.ui.user.LoginActivity
+import com.RajivSunar.e_commercewebsite.ui.user.ProfileActivity
 import com.google.android.material.navigation.NavigationView
 //import com.google.android.material.navigation.NavigationView
 import kotlinx.coroutines.CoroutineScope
@@ -50,7 +53,7 @@ class ProductActivity : AppCompatActivity(), NavigationView.OnNavigationItemSele
         navView.setNavigationItemSelectedListener(this)
 
         displayAll()
-
+        login()
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -92,7 +95,9 @@ class ProductActivity : AppCompatActivity(), NavigationView.OnNavigationItemSele
                                 product.price = item.price
                                 product.user = item.user
 
-                                ProductDB.getInstance(this@ProductActivity).getProductDAO().insert(product)
+                                productList.add(product)
+
+//                                ProductDB.getInstance(this@ProductActivity).getProductDAO().insert(product)
 
 //                            }
                             }
@@ -101,10 +106,10 @@ class ProductActivity : AppCompatActivity(), NavigationView.OnNavigationItemSele
 
 
 
-                        productList = ProductDB
-                            .getInstance(this@ProductActivity)
-                            .getProductDAO()
-                            .getAllProduct() as ArrayList<Product>
+//                        productList = ProductDB
+//                            .getInstance(this@ProductActivity)
+//                            .getProductDAO()
+//                            .getAllProduct() as ArrayList<Product>
 
                         val adapter = ProductAdapter(productList, this@ProductActivity)
                         productRecyclerView.layoutManager =
@@ -144,10 +149,35 @@ class ProductActivity : AppCompatActivity(), NavigationView.OnNavigationItemSele
             startActivity(
                 intent
             )
+        }else if(item.itemId == R.id.nav_profile) {
+            val intent = Intent(this@ProductActivity, ProfileActivity::class.java)
+            startActivity(
+                intent
+            )
+        }else if(item.itemId == R.id.nav_exchange_request_buyer) {
+            val intent = Intent(this@ProductActivity, ExchangeProductActivity::class.java)
+            intent.putExtra("for", "user")
+            startActivity(
+                intent
+            )
+        }else if(item.itemId == R.id.nav_exchange_request_seller) {
+            val intent = Intent(this@ProductActivity, ExchangeProductActivity::class.java)
+            intent.putExtra("for", "seller")
+            startActivity(
+                intent
+            )
         }
         return true
     }
 
+    fun login(){
+        val preferences = getSharedPreferences("emailPasswordPref", MODE_PRIVATE)
+        var token = preferences.getString("token", "")
+
+//        if(token != ""){
+//            ServiceBuilder.token = "Bearer ${token}"
+//        }
+    }
 
 }
 
