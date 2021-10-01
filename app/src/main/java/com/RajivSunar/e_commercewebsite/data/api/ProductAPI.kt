@@ -1,5 +1,6 @@
 package com.RajivSunar.e_commercewebsite.data.api
 
+import com.RajivSunar.e_commercewebsite.data.entity.Product
 import com.RajivSunar.e_commercewebsite.data.response.ProductResponse
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -29,4 +30,20 @@ interface ProductAPI {
         @Part("price") price: Int,
         @Part("for") _for: RequestBody
     ): Response<ProductResponse>
+
+    @Multipart
+    @PATCH("product/{id}")
+    suspend fun updateProduct(
+        @Path("id") id: String,
+        @Part newImages: ArrayList<MultipartBody.Part>,
+        @Part("image") image: ArrayList<String?>?,
+        @Part("name") name: RequestBody,
+        @Part("description") description: RequestBody,
+        @Part("price") price: Int,
+        @Part("for") _for: RequestBody
+    ): Response<ProductResponse>
+
+    @DELETE("product/{id}")
+    suspend fun deleteProduct(@Path("id") id: String):Response<ProductResponse>
+
 }
