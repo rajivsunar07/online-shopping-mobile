@@ -15,7 +15,7 @@ data class OrderItem(
     var quantity: Int? = null,
     var price: Int? = null,
     var seller: User? = null,
-    var exchangeFor: String? = null,
+    var exchangeFor: ExchangeProduct? = null,
     var _for: String? = null, // is 'for' in database
     var created_at: String? = null,
     var updated_at: String? = null
