@@ -40,14 +40,15 @@ class CheckoutActivity : AppCompatActivity() {
             }
 
             val order_id = intent.getStringExtra("OrderId")
+            val total_price = intent.getStringExtra("total_price")
 
-            sendOrder(etAddress.text.toString(), etPhone.text.toString(), order_id.toString())
+            sendOrder(etAddress.text.toString(), etPhone.text.toString(), order_id.toString(), total_price!!.toInt())
 
 
         }
     }
 
-    fun sendOrder(address: String, phone: String, order_id: String) {
+    fun sendOrder(address: String, phone: String, order_id: String, total_price: Int) {
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 val repository = CheckoutRepository()
@@ -57,7 +58,7 @@ class CheckoutActivity : AppCompatActivity() {
                     withContext(Dispatchers.Main){
 
                         val orderRepo = OrderRepository()
-                        val response = orderRepo.updateOrder(order_id, "ordered")
+                        val response = orderRepo.updateOrder(order_id, "ordered", total_price)
 
                         if(response.success == true){
                             val intent = Intent(this@CheckoutActivity, CartActivity::class.java)
