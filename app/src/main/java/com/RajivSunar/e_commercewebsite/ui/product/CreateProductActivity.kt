@@ -43,7 +43,6 @@ class CreateProductActivity : AppCompatActivity() {
     private var imageUri: Uri? = null
 
     var imagePathList = ArrayList<String>()
-    var imagePath: String? = null
 
     @RequiresApi(Build.VERSION_CODES.KITKAT)
     override fun onCreate(savedInstanceState: Bundle?) {
