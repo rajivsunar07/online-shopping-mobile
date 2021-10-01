@@ -27,6 +27,19 @@ interface OrderAPI {
     @PATCH("order/{id}")
     suspend fun updateOrder(
         @Path("id") id: String,
-        @Field("status") status: String
+        @Field("status") status: String?,
+        @Field("total_price") total_price: Int?
     ): Response<OrderResponse>
+
+    @FormUrlEncoded
+    @PATCH("order/item/{itemId}")
+    suspend fun updateOrderItem(
+        @Path("itemId") itemid: String,
+        @Field("price") price: Int?,
+        @Field("quantity") quantity: Int?,
+    ): Response<OrderResponse>
+
+    @DELETE("order/item/{itemId}")
+    suspend fun deleteOrderItem(@Path("itemId") itemId: String): Response<OrderResponse>
+
 }
