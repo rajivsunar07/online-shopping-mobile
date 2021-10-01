@@ -1,18 +1,19 @@
 package com.RajivSunar.e_commercewebsite.ui.adapter
 
 import android.content.Context
+import android.media.Image
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.recyclerview.widget.RecyclerView
 import com.RajivSunar.e_commercewebsite.R
 import com.RajivSunar.e_commercewebsite.data.api.ServiceBuilder
+import com.RajivSunar.e_commercewebsite.data.entity.Order
 import com.RajivSunar.e_commercewebsite.data.entity.OrderItem
+import com.RajivSunar.e_commercewebsite.data.repository.CommentRepository
 import com.RajivSunar.e_commercewebsite.data.repository.OrderRepository
+import com.RajivSunar.e_commercewebsite.ui.order.CartActivity
 import com.bumptech.glide.Glide
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -28,6 +29,12 @@ class CartAdapter(
         val imgItem: ImageView = view.findViewById(R.id.imgItem)
         val tvQuantity: TextView = view.findViewById(R.id.tvQuantity)
         val tvPrice: TextView = view.findViewById(R.id.tvPrice)
+        val btnDecrease: Button = view.findViewById(R.id.btnDecrease)
+        val btnIncrease: Button = view.findViewById(R.id.btnIncrease)
+        val exchangeLayout: LinearLayout = view.findViewById(R.id.exchangeLayout)
+        val tvExchangeProduct: TextView = view.findViewById(R.id.tvExchangeProduct)
+        val imgExchangeProduct: ImageView = view.findViewById(R.id.imgExchangeProduct)
+        val btnDelete: Button = view.findViewById(R.id.btnDelete)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CartAdapter.CartViewHolder {
@@ -46,21 +53,117 @@ class CartAdapter(
             Glide.with(context)
                 .load( ServiceBuilder.BASE_URL + cartItem.product?.image!![0])
                 .into(holder.imgItem)
-//            Glide.with(context)
-//                .load( ServiceBuilder.BASE_URL + cartItem.image!![0])
-//                .into(holder.imgProduct)
 
-//            holder.tvName.text = product.name
-//            holder.tvPrice.text = "RS. " + product.price.toString()
+            holder.btnDecrease.setOnClickListener {
+                val quantity = cartItem.quantity?.minus(1)
+                val price = (cartItem.price!! / cartItem.quantity!!) * quantity!!
+                var total_price = CartActivity.order!!.total_price?.minus(cartItem.price!!)
+                    ?.plus(price)
 
+                updateOrderItem(cartItem._id, quantity, price,position)
+                udpateOrder(total_price, CartActivity.order!!._id,  CartActivity.order!!.status.toString())
+            }
+
+            holder.btnIncrease.setOnClickListener {
+                val quantity = cartItem.quantity?.plus(1)
+                val price = (cartItem.price!! / cartItem.quantity!!) * quantity!!
+                var total_price = CartActivity.order!!.total_price?.minus(cartItem.price!!)
+                    ?.plus(price)
+
+                updateOrderItem(cartItem._id, quantity, price,position)
+                udpateOrder(total_price, CartActivity.order!!._id, CartActivity.order!!.status.toString())
+            }
+
+            if(cartItem.exchangeFor != null){
+                holder.exchangeLayout.visibility = View.VISIBLE
+
+                holder.tvExchangeProduct.visibility = View.VISIBLE
+                holder.tvExchangeProduct.text = cartItem.exchangeFor!!.name
+
+                Glide.with(context)
+                    .load( ServiceBuilder.BASE_URL + cartItem.exchangeFor?.image!![0])
+                    .into(holder.imgExchangeProduct)
+            }
+
+            holder.btnDelete.setOnClickListener {
+                CoroutineScope(Dispatchers.IO).launch {
+                    try {
+                        val repository = OrderRepository()
+                        val response = repository.deleteOrderItem(cartItem._id)
+                        if(response.success == true){
+                            withContext(Dispatchers.Main){
+                                Toast.makeText(context.applicationContext, response.message, Toast.LENGTH_SHORT)
+                                    .show()
+
+                                cartItemList.removeAt(position)
+
+                                notifyItemRemoved(position)
+                            }
+                        }
+                    }catch(ex: Exception){
+                        withContext(Dispatchers.Main){
+                            Toast.makeText(context.applicationContext, ex.toString(), Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                }
+            }
 
         }
 
+    }
+
+    private fun udpateOrder(totalPrice: Int?, id: String, status: String) {
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val repository = OrderRepository()
+                val response = repository.updateOrder(id, total_price = totalPrice, status = status)
+                if(response.success == true){
+                    withContext(Dispatchers.Main){
+                        Toast.makeText(context.applicationContext, response.message, Toast.LENGTH_SHORT)
+                            .show()
+
+                        CartActivity.order?.total_price = totalPrice
+
+                        notifyDataSetChanged()
+                    }
+                }
+            }catch(ex: Exception){
+                withContext(Dispatchers.Main){
+                    Toast.makeText(context.applicationContext, ex.toString(), Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
     }
 
 
     override fun getItemCount(): Int {
         return cartItemList.size
     }
+
+    fun updateOrderItem(itemId: String, quantity: Int, price: Int, position: Int){
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val repository = OrderRepository()
+                val response = repository.updateOrderItem(itemId, quantity, price)
+                if(response.success == true){
+                    withContext(Dispatchers.Main){
+                        Toast.makeText(context.applicationContext, response.message, Toast.LENGTH_SHORT)
+                            .show()
+
+                        cartItemList[position].quantity = quantity
+                        cartItemList[position].price = price
+
+                        notifyDataSetChanged()
+                    }
+                }
+            }catch(ex: Exception){
+                withContext(Dispatchers.Main){
+                    Toast.makeText(context.applicationContext, ex.toString(), Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
+
+
 
 }
