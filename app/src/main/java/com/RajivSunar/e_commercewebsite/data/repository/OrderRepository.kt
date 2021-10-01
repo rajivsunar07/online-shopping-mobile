@@ -35,9 +35,22 @@ class OrderRepository : MyApiRequest() {
         }
     }
 
-    suspend fun updateOrder(_id: String, status: String) : OrderResponse{
+    suspend fun updateOrder(_id: String, status: String?, total_price: Int?) : OrderResponse{
         return apiRequest{
-            orderAPI.updateOrder(_id, status)
+            orderAPI.updateOrder(_id, status, total_price)
+        }
+    }
+
+
+    suspend fun updateOrderItem(itemid: String, price: Int?,quantity: Int?) : OrderResponse{
+        return apiRequest{
+            orderAPI.updateOrderItem(itemid, price, quantity)
+        }
+    }
+
+    suspend fun deleteOrderItem(itemId: String): OrderResponse{
+        return apiRequest {
+            orderAPI.deleteOrderItem(itemId)
         }
     }
 }
