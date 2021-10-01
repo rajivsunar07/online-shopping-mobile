@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
@@ -78,6 +79,12 @@ class LoginActivity : AppCompatActivity() {
                 if(response.success == true){
                     ServiceBuilder.token = "Bearer ${response.token}"
 
+                    val sharedPreferences = getSharedPreferences("emailPasswordPref", MODE_PRIVATE)
+                    val editor = sharedPreferences.edit()
+                    editor.putString("token", response.token)
+
+                    getUserInformation()
+
                     startActivity(
                         Intent(this@LoginActivity, ProductActivity::class.java)
                     )
@@ -98,12 +105,32 @@ class LoginActivity : AppCompatActivity() {
 
     }
 
-    private fun saveEmailAndPassword() {
+    private fun getUserInformation(){
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val repository = UserRepository()
+                val response = repository.getUser()
+                if(response.success == true){
+                    withContext(Dispatchers.Main){
+                        saveEmailAndPassword(response.user!!._id, response.user!!.name!!)
+                    }
+                }
+            }catch(ex: Exception){
+                withContext(Dispatchers.Main){
+                    Toast.makeText(this@LoginActivity.applicationContext, ex.toString(), Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
+
+    private fun saveEmailAndPassword(userId: String, userName: String) {
         val sharedPreferences = getSharedPreferences("emailPasswordPref", MODE_PRIVATE)
         val editor = sharedPreferences.edit()
 
         editor.putString("email",etEmail.text.toString())
         editor.putString("password",etPassword.text.toString())
+        editor.putString("userID",userId)
+        editor.putString("userName",userName)
 
         editor.apply()
 
