@@ -8,7 +8,7 @@ import java.util.concurrent.TimeUnit
 object ServiceBuilder {
 
     var BASE_URL = "http://10.0.2.2:5000/"
-    var  token: String? = null
+    var token: String? = null
 
     var okHttpClient = OkHttpClient.Builder()
         .addInterceptor(MyInterceptor())
