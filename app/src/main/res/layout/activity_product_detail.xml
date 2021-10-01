@@ -34,12 +34,54 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
-    <Button
-        android:id="@+id/btnAddTocart"
-        android:text="Add to cart"
-        android:layout_gravity="center"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/btnAddTocart"
+            android:text="Add to cart"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <Button
+            android:id="@+id/btnRequestExchange"
+            android:text="Request For exchange"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+
+    </LinearLayout>
+
+
+
+    <GridLayout
+        android:rowCount="1"
+        android:columnCount="4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+            android:id="@+id/etComment"
+            android:hint="Add a comment"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="3"
+            android:layout_columnSpan="3"/>
+        <Button
+            android:id="@+id/btnComment"
+            android:text="Comment"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"/>
+    </GridLayout>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvComment"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
+
 
 
 
