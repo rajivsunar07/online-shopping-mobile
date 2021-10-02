@@ -5,15 +5,16 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="20dp"
     tools:context=".ui.exchangeproduct.ExchangeProductCreateActivity">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="10dp"
         android:text="Request for exchange"
         android:textColor="@color/black"
-        android:textSize="20dp"
+        android:textSize="30dp"
+        android:layout_marginBottom="20dp"
         android:textStyle="bold" />
 
     <EditText
@@ -28,19 +29,26 @@
         android:layout_height="wrap_content"
         android:hint="Description" />
 
-    <Button
-        android:id="@+id/btnImage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Select picture" />
-
     <ImageView
         android:id="@+id/imgProduct"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
     <Button
+        android:id="@+id/btnImage"
+        android:backgroundTint="#02bec4"
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Select picture" />
+
+
+
+    <Button
         android:id="@+id/btnCreate"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center"
+        android:backgroundTint="#02c41f"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Request exchange" />

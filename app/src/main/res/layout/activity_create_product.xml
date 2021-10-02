@@ -45,6 +45,8 @@
     <Button
         android:id="@+id/btnImage"
         android:text="Select picture"
+        android:backgroundTint="#02bec4"
+        android:layout_marginTop="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
     <ImageView
@@ -56,6 +58,9 @@
     <Button
         android:id="@+id/btnAdd"
         android:text="Create product"
+        android:layout_gravity="center"
+        android:backgroundTint="#02c41f"
+        android:layout_marginTop="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 

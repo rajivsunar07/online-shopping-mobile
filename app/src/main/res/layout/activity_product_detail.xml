@@ -6,14 +6,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:padding="20dp"
     tools:context=".ui.product.ProductDetailActivity">
 
     <ImageView
         android:id="@+id/imgProduct"
         android:src="@drawable/ic_image"
         android:layout_gravity="center"
-        android:layout_width="300dp"
-        android:layout_height="300dp"/>
+        android:layout_width="150dp"
+        android:layout_height="150dp"/>
 
     <TextView
         android:id="@+id/tvName"
@@ -35,19 +36,23 @@
         android:layout_height="wrap_content"/>
 
     <LinearLayout
-        android:orientation="horizontal"
+        android:layout_marginBottom="20dp"
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <Button
             android:id="@+id/btnAddTocart"
             android:text="Add to cart"
+            android:drawableLeft="@drawable/ic_baseline_add_shopping_cart_24"
+            android:backgroundTint="#fcba03"
             android:layout_gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
         <Button
             android:id="@+id/btnRequestExchange"
+            android:backgroundTint="#03998d"
             android:text="Request For exchange"
             android:layout_gravity="center"
             android:layout_width="wrap_content"
@@ -56,9 +61,11 @@
 
     </LinearLayout>
 
+    <View style="@style/Divider.Horizontal" />
 
 
     <GridLayout
+        android:layout_marginTop="20dp"
         android:rowCount="1"
         android:columnCount="4"
         android:layout_width="match_parent"
@@ -71,6 +78,7 @@
             android:layout_columnSpan="3"/>
         <Button
             android:id="@+id/btnComment"
+            android:backgroundTint="#04b327"
             android:text="Comment"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"/>
@@ -79,6 +87,7 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvComment"
+        android:layout_marginTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 

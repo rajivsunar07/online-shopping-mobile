@@ -5,7 +5,10 @@
     android:layout_width="550px"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="2dp"
+    android:padding="10dp"
+    android:layout_marginRight="10dp"
+    android:layout_marginLeft="10dp"
+    android:layout_marginBottom="10dp"
     android:layout_margin="2dp">
 
     <androidx.cardview.widget.CardView
@@ -58,6 +61,7 @@
             <Button
                 android:id="@+id/btnAddTocart"
                 android:text="Add to cart"
+                android:drawableLeft="@drawable/ic_baseline_add_shopping_cart_24"
                 android:backgroundTint="#F6B83B"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

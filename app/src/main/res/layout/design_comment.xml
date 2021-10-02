@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-   android:orientation="vertical"
+    android:orientation="vertical"
     android:padding="12dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
@@ -9,6 +9,8 @@
     <TextView
         android:id="@+id/tvComment"
         android:text="Comment"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/black"
         android:layout_marginBottom="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
@@ -32,16 +34,19 @@
             android:layout_columnWeight="1"
             android:text="Date"/>
 
-        <Button
+        <ImageButton
             android:id="@+id/btnDelete"
+            android:src="@drawable/ic_delete"
             android:layout_gravity="end"
             android:layout_columnWeight="1"
-            android:visibility="invisible"
-            android:text="Delete"/>
+            android:backgroundTint="@color/white"
+            android:layout_height="50dp"
+            android:visibility="gone"/>
 
 
 
     </GridLayout>
+
     <View style="@style/Divider.Horizontal" />
 
 

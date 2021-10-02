@@ -5,12 +5,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
     tools:context=".ui.order.CartActivity">
 
 
 
     <LinearLayout
         android:id="@+id/linear"
+        android:padding="20dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -18,9 +20,9 @@
         <TextView
             android:text="Cart"
             android:textStyle="bold"
-            android:padding="5dp"
-            android:layout_margin="5dp"
-            android:textSize="20dp"
+            android:textColor="@color/black"
+            android:layout_marginBottom="20dp"
+            android:textSize="30dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
@@ -34,16 +36,22 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
+            android:textSize="20dp"
+            android:textColor="@color/black"
             android:text="Total Price: " />
 
         <TextView
             android:id="@+id/tvTotalPrice"
+            android:textColor="#08ff2d"
+            android:textSize="15dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
        <Button
            android:id="@+id/btnOrder"
            android:text="Order"
+           android:layout_gravity="center"
+           android:backgroundTint="#e602c3"
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"/>
 

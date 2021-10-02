@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:padding="20dp"
     tools:context=".ui.user.ProfileUpdateActivity">
 
 
@@ -18,9 +19,26 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
+    <ImageView
+        android:id="@+id/imgUser"
+        android:src="@drawable/ic_baseline_account_circle_24"
+        android:layout_gravity="center"
+        android:layout_width="150dp"
+        android:layout_height="150dp"/>
+
+    <Button
+        android:id="@+id/btnImage"
+        android:layout_gravity="center"
+        android:text="Select picture"
+        android:backgroundTint="#00b4ba"
+        android:textColor="@color/white"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
     <EditText
         android:id="@+id/etName"
         android:hint="Name"
+        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
@@ -43,19 +61,11 @@
         android:layout_height="wrap_content"/>
 
     <Button
-        android:id="@+id/btnImage"
-        android:text="Select picture"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-    <ImageView
-        android:id="@+id/imgUser"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-
-
-    <Button
         android:id="@+id/btnUpdate"
         android:text="Update profile"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="#00d644"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 </LinearLayout>
