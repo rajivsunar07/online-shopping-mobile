@@ -2,6 +2,7 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal"
+    android:layout_margin="20dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -21,12 +22,15 @@
 
         <TextView
             android:id="@+id/tvName"
+            android:textColor="@color/black"
+            android:textStyle="bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Name"
             />
         <TextView
             android:id="@+id/tvPrice"
+            android:textColor="#12b500"
             android:text="Price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -41,15 +45,17 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent">
 
-            <Button
+            <ImageButton
                 android:id="@+id/btnUpdate"
-                android:text="Update"
+                android:src="@drawable/ic_baseline_edit_24"
+                android:backgroundTint="@color/white"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 />
-            <Button
+            <ImageButton
                 android:id="@+id/btnDelete"
-                android:text="Delete"
+                android:src="@drawable/ic_delete"
+                android:backgroundTint="@color/white"
                 android:layout_marginLeft="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
