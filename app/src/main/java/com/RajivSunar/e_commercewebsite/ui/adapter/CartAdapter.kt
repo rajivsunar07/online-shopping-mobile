@@ -21,7 +21,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class CartAdapter(
-    val cartItemList: ArrayList<OrderItem>,
+    val cartItemList: ArrayList<OrderItem>?,
     val context: Context
 ): RecyclerView.Adapter<CartAdapter.CartViewHolder>() {
 
@@ -45,7 +45,7 @@ class CartAdapter(
     }
 
     override fun onBindViewHolder(holder: CartAdapter.CartViewHolder, position: Int) {
-        if(cartItemList[position] != null){
+        if(cartItemList!![position] != null){
             val cartItem = cartItemList[position]
 
             holder.tvQuantity.text = cartItem.quantity.toString()
@@ -57,6 +57,9 @@ class CartAdapter(
             holder.btnDecrease.setOnClickListener {
                 val quantity = cartItem.quantity?.minus(1)
                 val price = (cartItem.price!! / cartItem.quantity!!) * quantity!!
+                if(quantity < 1){
+                    return@setOnClickListener
+                }
                 var total_price = CartActivity.order!!.total_price?.minus(cartItem.price!!)
                     ?.plus(price)
 
@@ -69,6 +72,10 @@ class CartAdapter(
                 val price = (cartItem.price!! / cartItem.quantity!!) * quantity!!
                 var total_price = CartActivity.order!!.total_price?.minus(cartItem.price!!)
                     ?.plus(price)
+                if(quantity < 1){
+
+                    return@setOnClickListener
+                }
 
                 updateOrderItem(cartItem._id, quantity, price,position)
                 udpateOrder(total_price, CartActivity.order!!._id, CartActivity.order!!.status.toString())
@@ -137,7 +144,7 @@ class CartAdapter(
 
 
     override fun getItemCount(): Int {
-        return cartItemList.size
+        return cartItemList!!.size
     }
 
     fun updateOrderItem(itemId: String, quantity: Int, price: Int, position: Int){
@@ -150,8 +157,8 @@ class CartAdapter(
                         Toast.makeText(context.applicationContext, response.message, Toast.LENGTH_SHORT)
                             .show()
 
-                        cartItemList[position].quantity = quantity
-                        cartItemList[position].price = price
+                        cartItemList!![position].quantity = quantity
+                        cartItemList!![position].price = price
 
                         notifyDataSetChanged()
                     }

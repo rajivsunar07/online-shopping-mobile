@@ -27,11 +27,11 @@ interface UserAPI {
     @Multipart
     @PATCH("user/")
     suspend fun updateUser(
-        @Part image: MultipartBody.Part,
-        @Part("email") email: RequestBody,
-        @Part("name") name: RequestBody,
-        @Part("address") address: RequestBody,
-        @Part("phone") phone: RequestBody
+        @Part image: MultipartBody.Part?,
+        @Part("email") email: RequestBody?,
+        @Part("name") name: RequestBody?,
+        @Part("address") address: RequestBody?,
+        @Part("phone") phone: RequestBody?
     ): Response<UserResponse>
 
     @FormUrlEncoded

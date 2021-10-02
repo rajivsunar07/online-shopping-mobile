@@ -12,11 +12,11 @@
     android:layout_margin="2dp">
 
     <androidx.cardview.widget.CardView
-        android:layout_width="545px"
+        android:layout_width="500px"
         android:layout_height="wrap_content">
 
         <LinearLayout
-            android:layout_width="210dp"
+            android:layout_width="490px"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
@@ -26,8 +26,9 @@
 
             <ImageView
                 android:id="@+id/imgProduct"
-                android:layout_width="match_parent"
-                android:layout_height="206dp" />
+                android:layout_gravity="center"
+                android:layout_width="150dp"
+                android:layout_height="150dp" />
 
             <View style="@style/Divider.Horizontal" />
 

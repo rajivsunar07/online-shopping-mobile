@@ -10,9 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.RajivSunar.e_commercewebsite.R
 import com.RajivSunar.e_commercewebsite.data.api.ServiceBuilder
 import com.RajivSunar.e_commercewebsite.data.entity.Product
-import com.RajivSunar.e_commercewebsite.data.repository.OrderRepository
 import com.RajivSunar.e_commercewebsite.data.repository.ProductRepository
-import com.RajivSunar.e_commercewebsite.ui.product.UpdateProductActivity
 import com.bumptech.glide.Glide
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -30,7 +28,6 @@ class MyProductsAdapter(
         val tvName: TextView = view.findViewById(R.id.tvName)
         val tvPrice: TextView = view.findViewById(R.id.tvPrice)
         val tvDescription: TextView = view.findViewById(R.id.tvDescription)
-        val btnUpdate: ImageButton = view.findViewById(R.id.btnUpdate)
         val btnDelete: ImageButton = view.findViewById(R.id.btnDelete)
     }
 
@@ -54,14 +51,6 @@ class MyProductsAdapter(
             holder.tvPrice.text = "RS. " + product.price.toString()
             holder.tvDescription.text =  product.description.toString()
 
-            holder.btnUpdate.setOnClickListener {
-                val intent = Intent(this.context, UpdateProductActivity::class.java)
-                intent.putExtra("id", product._id)
-                this.context.startActivity(
-                    intent
-                )
-            }
-
 
             holder.btnDelete.setOnClickListener {
 
@@ -74,6 +63,8 @@ class MyProductsAdapter(
                         if(response.success == true){
                             withContext(Dispatchers.Main){
                                 Toast.makeText(context, response.message, Toast.LENGTH_SHORT).show()
+                                productList.removeAt(position)
+                                notifyItemRemoved(position)
                             }
                         }
                     }catch(ex: Exception){

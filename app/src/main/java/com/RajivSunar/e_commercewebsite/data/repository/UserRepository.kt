@@ -31,11 +31,11 @@ class UserRepository: MyApiRequest() {
     }
 
     suspend fun updateUser(
-        image: MultipartBody.Part,
-        email: RequestBody,
-        name: RequestBody,
-        phone: RequestBody,
-        address: RequestBody
+        image: MultipartBody.Part?,
+        email: RequestBody?,
+        name: RequestBody?,
+        phone: RequestBody?,
+        address: RequestBody?
     ): UserResponse{
         return apiRequest {
             userApi.updateUser(

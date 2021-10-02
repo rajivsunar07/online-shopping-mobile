@@ -4,9 +4,11 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/drawable/border.xml" value="0.2851851851851852" />
+        <entry key="app/src/main/res/drawable/ic_arrow_up.xml" value="0.1925925925925926" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.165625" />
         <entry key="app/src/main/res/drawable/layout_bg.xml" value="0.2851851851851852" />
         <entry key="app/src/main/res/drawable/side_nav_bar.xml" value="0.16875" />
+        <entry key="app/src/main/res/layout-sw600dp/design_product.xml" value="0.21171875" />
         <entry key="app/src/main/res/layout/activity_cart.xml" value="0.335" />
         <entry key="app/src/main/res/layout/activity_change_password.xml" value="0.3098958333333333" />
         <entry key="app/src/main/res/layout/activity_checkout.xml" value="0.25" />
@@ -25,7 +27,7 @@
         <entry key="app/src/main/res/layout/activity_profile_update.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_signup.xml" value="0.2462962962962963" />
         <entry key="app/src/main/res/layout/activity_update_product.xml" value="0.28229166666666666" />
-        <entry key="app/src/main/res/layout/cart_design.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/cart_design.xml" value="0.335" />
         <entry key="app/src/main/res/layout/content_cart.xml" value="0.28229166666666666" />
         <entry key="app/src/main/res/layout/design_comment.xml" value="0.25" />
         <entry key="app/src/main/res/layout/design_exchange_product.xml" value="0.25" />

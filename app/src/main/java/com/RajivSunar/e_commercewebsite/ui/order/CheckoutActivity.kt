@@ -40,7 +40,7 @@ class CheckoutActivity : AppCompatActivity() {
             }
 
             val order_id = intent.getStringExtra("OrderId")
-            val total_price = intent.getStringExtra("total_price")
+            val total_price = intent.getIntExtra("total_price", 0)
 
             sendOrder(etAddress.text.toString(), etPhone.text.toString(), order_id.toString(), total_price!!.toInt())
 

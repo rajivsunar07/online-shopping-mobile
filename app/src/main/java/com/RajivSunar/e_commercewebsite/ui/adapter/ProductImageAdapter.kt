@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.RajivSunar.e_commercewebsite.R
 import com.RajivSunar.e_commercewebsite.data.api.ServiceBuilder
 import com.RajivSunar.e_commercewebsite.data.entity.OrderItem
-import com.RajivSunar.e_commercewebsite.ui.product.UpdateProductActivity
 import com.bumptech.glide.Glide
 
 class ProductImageAdapter(
@@ -48,8 +47,7 @@ class ProductImageAdapter(
                 .into(holder.imgProduct)
 
             holder.btnRemove.setOnClickListener {
-                UpdateProductActivity.lstImage?.removeAt(position)
-                Toast.makeText(context.applicationContext, UpdateProductActivity.lstImage.toString(), Toast.LENGTH_SHORT).show()
+                lstImage?.removeAt(position)
             }
         }
 

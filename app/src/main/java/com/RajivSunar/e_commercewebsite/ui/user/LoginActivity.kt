@@ -61,26 +61,8 @@ class LoginActivity : AppCompatActivity() {
         val email = etEmail.text.toString()
         val password = etPassword.text.toString()
 
-//        var user: User? = null
+
         CoroutineScope(Dispatchers.IO).launch {
-//            user = UserDB
-//                .getInstance(this@LoginActivity)
-//                .getUserDAO()
-////                .checkUser(email, password)
-//            if (user == null) {
-//                withContext(Dispatchers.Main) {
-//                    Toast.makeText(this@LoginActivity, "Invalid credentials", Toast.LENGTH_SHORT)
-//                        .show()
-//                }
-//            } else {
-//                saveEmailAndPassword()
-//                startActivity(
-//                    Intent(
-//                        this@LoginActivity,
-//                        DashboardActivity::class.java
-//                    )
-//                )
-//            }
 
             try{
                 val repository = UserRepository()

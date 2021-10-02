@@ -138,7 +138,7 @@ class CreateProductActivity : AppCompatActivity() {
                 )
                 if (response.success == true) {
 
-                    val intent = Intent(this@CreateProductActivity, ProductActivity::class.java)
+                    val intent = Intent(this@CreateProductActivity, MyProductsActivity::class.java)
                     startActivity(
                         intent
                     )

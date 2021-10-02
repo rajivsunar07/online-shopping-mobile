@@ -178,6 +178,7 @@ class ProductDetailActivity : AppCompatActivity() {
                 )
                 if(response.success == true){
                     withContext(Dispatchers.Main){
+                        lstComment.clear()
                         getComment(id)
                         Toast.makeText(this@ProductDetailActivity, response.message, Toast.LENGTH_SHORT).show()
                     }

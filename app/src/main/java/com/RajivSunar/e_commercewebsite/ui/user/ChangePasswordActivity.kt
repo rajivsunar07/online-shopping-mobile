@@ -66,11 +66,14 @@ class ChangePasswordActivity : AppCompatActivity() {
                     etNewPassword.text.toString()
                 )
                 if (response.success == true) {
-                    Toast.makeText(this@ChangePasswordActivity.applicationContext, response.message, Toast.LENGTH_SHORT).show()
-                    val intent = Intent(this@ChangePasswordActivity, ProfileActivity::class.java)
-                    startActivity(
-                        intent
-                    )
+                    withContext(Dispatchers.Main){
+                        Toast.makeText(this@ChangePasswordActivity.applicationContext, response.message, Toast.LENGTH_SHORT).show()
+                        val intent = Intent(this@ChangePasswordActivity, ProfileActivity::class.java)
+                        startActivity(
+                            intent
+                        )
+                    }
+
                 }
             } catch (ex: Exception) {
                 withContext(Dispatchers.Main) {
