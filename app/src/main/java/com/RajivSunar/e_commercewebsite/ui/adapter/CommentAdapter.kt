@@ -8,10 +8,7 @@ import android.opengl.Visibility
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.recyclerview.widget.RecyclerView
 import com.RajivSunar.e_commercewebsite.R
 import com.RajivSunar.e_commercewebsite.data.api.ServiceBuilder
@@ -36,7 +33,7 @@ class CommentAdapter(
         val tvComment: TextView = view.findViewById(R.id.tvComment)
         val tvUser: TextView = view.findViewById(R.id.tvUser)
         val tvDate: TextView = view.findViewById(R.id.tvDate)
-        val btnDelete: Button = view.findViewById(R.id.btnDelete)
+        val btnDelete: ImageButton = view.findViewById(R.id.btnDelete)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CommentAdapter.CommentViewHolder {

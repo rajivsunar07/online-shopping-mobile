@@ -3,6 +3,7 @@ package com.RajivSunar.e_commercewebsite.ui.user
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.TextUtils
 import android.util.Log
 import android.view.View
 import android.widget.Button
@@ -31,11 +32,20 @@ class LoginActivity : AppCompatActivity() {
 
         etEmail = findViewById(R.id.etEmail)
         etPassword = findViewById(R.id.etPassword)
-        tvForgotPassword = findViewById(R.id.tvForgotPassword)
         btnLogin = findViewById(R.id.btnLogin)
         tvNoAccount = findViewById(R.id.tvNoAccount)
 
         btnLogin.setOnClickListener {
+            if(TextUtils.isEmpty(etEmail.text.toString())){
+                etEmail.error = "Enter email address"
+                etEmail.requestFocus()
+                return@setOnClickListener
+            }else if(TextUtils.isEmpty(etPassword.text.toString())){
+                etPassword.error = "Enter password"
+                etPassword.requestFocus()
+                return@setOnClickListener
+            }
+
             login()
         }
 
@@ -43,7 +53,6 @@ class LoginActivity : AppCompatActivity() {
             val intent = Intent(this, SignupActivity::class.java)
             startActivity(intent)
         }
-
 
     }
 

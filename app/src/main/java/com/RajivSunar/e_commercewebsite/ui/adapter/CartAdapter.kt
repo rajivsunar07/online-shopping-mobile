@@ -29,12 +29,12 @@ class CartAdapter(
         val imgItem: ImageView = view.findViewById(R.id.imgItem)
         val tvQuantity: TextView = view.findViewById(R.id.tvQuantity)
         val tvPrice: TextView = view.findViewById(R.id.tvPrice)
-        val btnDecrease: Button = view.findViewById(R.id.btnDecrease)
-        val btnIncrease: Button = view.findViewById(R.id.btnIncrease)
+        val btnDecrease: ImageButton = view.findViewById(R.id.btnDecrease)
+        val btnIncrease: ImageButton = view.findViewById(R.id.btnIncrease)
         val exchangeLayout: LinearLayout = view.findViewById(R.id.exchangeLayout)
         val tvExchangeProduct: TextView = view.findViewById(R.id.tvExchangeProduct)
         val imgExchangeProduct: ImageView = view.findViewById(R.id.imgExchangeProduct)
-        val btnDelete: Button = view.findViewById(R.id.btnDelete)
+        val btnDelete: ImageButton = view.findViewById(R.id.btnDelete)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CartAdapter.CartViewHolder {

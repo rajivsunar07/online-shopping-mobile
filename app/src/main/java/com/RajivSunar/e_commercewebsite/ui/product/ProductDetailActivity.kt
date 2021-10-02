@@ -36,9 +36,7 @@ class ProductDetailActivity : AppCompatActivity() {
     private lateinit var btnComment: Button
     private lateinit var btnRequestExchange: Button
 
-
     var lstComment = ArrayList<Comment>()
-
     var product = Product()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -58,7 +56,6 @@ class ProductDetailActivity : AppCompatActivity() {
         val id = intent.getStringExtra("id").toString()
 
         getProductDetails(id)
-
         getComment(id)
 
         btnAddTocart.setOnClickListener {
@@ -71,7 +68,7 @@ class ProductDetailActivity : AppCompatActivity() {
                 etComment.requestFocus()
                 return@setOnClickListener
             }
-            comment()
+            comment(id)
         }
 
         btnRequestExchange.setOnClickListener {
@@ -94,9 +91,7 @@ class ProductDetailActivity : AppCompatActivity() {
                     withContext(Dispatchers.Main){
                         product = response.result?.get(0)!!
 
-                        Toast.makeText(this@ProductDetailActivity, product.toString(), Toast.LENGTH_SHORT).show()
                         if (product != null) {
-                            Toast.makeText(this@ProductDetailActivity, product.toString(), Toast.LENGTH_SHORT).show()
                             Glide.with(this@ProductDetailActivity)
                                 .load(ServiceBuilder.BASE_URL + product.image!![0])
                                 .into(imgProduct)
@@ -173,7 +168,7 @@ class ProductDetailActivity : AppCompatActivity() {
         }
     }
 
-    fun comment() {
+    fun comment(id: String) {
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 val repository = CommentRepository()
@@ -183,6 +178,7 @@ class ProductDetailActivity : AppCompatActivity() {
                 )
                 if(response.success == true){
                     withContext(Dispatchers.Main){
+                        getComment(id)
                         Toast.makeText(this@ProductDetailActivity, response.message, Toast.LENGTH_SHORT).show()
                     }
                 }

@@ -7,6 +7,7 @@ import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.RajivSunar.e_commercewebsite.R
@@ -113,7 +114,7 @@ class ProductActivity : AppCompatActivity(), NavigationView.OnNavigationItemSele
 
                         val adapter = ProductAdapter(productList, this@ProductActivity)
                         productRecyclerView.layoutManager =
-                            LinearLayoutManager(this@ProductActivity)
+                            GridLayoutManager(this@ProductActivity, 2)
                         productRecyclerView.adapter = adapter
 
                     }
