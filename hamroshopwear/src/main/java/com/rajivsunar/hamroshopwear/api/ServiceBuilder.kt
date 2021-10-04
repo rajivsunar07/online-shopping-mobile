@@ -1,14 +1,16 @@
-package com.RajivSunar.e_commercewebsite.data.api
+package com.rajivsunar.hamroshopwear.api
+
 
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
+
 object ServiceBuilder {
 
-//    var BASE_URL = "http://10.0.2.2:5000/"
-    var BASE_URL = "http://192.168.1.64:5000/"
+    var BASE_URL = "http://10.0.2.2:5000/"
+//    var BASE_URL = "http://192.168.1.64:5000/"
     var token: String? = null
 
     var okHttpClient = OkHttpClient.Builder()
