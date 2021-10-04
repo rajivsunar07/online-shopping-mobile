@@ -13,6 +13,7 @@ import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import java.io.File
 import android.content.ContentResolver
+import android.graphics.Color
 import android.os.Build
 import android.provider.OpenableColumns
 import android.text.TextUtils
@@ -20,6 +21,9 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
+import com.RajivSunar.e_commercewebsite.NotificationChannel
 import com.RajivSunar.e_commercewebsite.data.repository.ProductRepository
 import com.RajivSunar.e_commercewebsite.ui.UploadRequestBody
 import kotlinx.coroutines.CoroutineScope
@@ -137,7 +141,7 @@ class CreateProductActivity : AppCompatActivity() {
                     RequestBody.create("multipart/form-data".toMediaTypeOrNull(), etFor.text.toString())
                 )
                 if (response.success == true) {
-
+                    loadNotification()
                     val intent = Intent(this@CreateProductActivity, MyProductsActivity::class.java)
                     startActivity(
                         intent
@@ -153,5 +157,21 @@ class CreateProductActivity : AppCompatActivity() {
         }
 
 
+    }
+
+    fun loadNotification() {
+        val notificationManager = NotificationManagerCompat.from(this)
+
+        val notificationChannels = NotificationChannel(this)
+        notificationChannels.createNotificationChannels()
+
+        val notification = NotificationCompat.Builder(this, notificationChannels.CHANNEL_2)
+            .setSmallIcon(R.drawable.notification)
+            .setContentTitle("Product created")
+            .setContentText("The product has been created")
+            .setColor(Color.BLUE)
+            .build()
+
+        notificationManager.notify(2, notification)
     }
 }

@@ -1,12 +1,19 @@
 package com.RajivSunar.e_commercewebsite.ui.order
 
+
 import android.content.Intent
+import android.graphics.Color
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import androidx.annotation.RequiresApi
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
+import com.RajivSunar.e_commercewebsite.NotificationChannel
 import com.RajivSunar.e_commercewebsite.R
 import com.RajivSunar.e_commercewebsite.data.repository.CheckoutRepository
 import com.RajivSunar.e_commercewebsite.data.repository.OrderRepository
@@ -61,15 +68,14 @@ class CheckoutActivity : AppCompatActivity() {
                         val response = orderRepo.updateOrder(order_id, "ordered", total_price)
 
                         if(response.success == true){
+                            loadNotification()
+
                             val intent = Intent(this@CheckoutActivity, CartActivity::class.java)
                             startActivity(
                                 intent
                             )
                         }
-
                     }
-
-
                 }
             }catch(ex: Exception){
                 withContext(Dispatchers.Main){
@@ -78,5 +84,21 @@ class CheckoutActivity : AppCompatActivity() {
             }
         }
 
+    }
+
+    fun loadNotification() {
+        val notificationManager = NotificationManagerCompat.from(this)
+
+        val notificationChannels = NotificationChannel(this)
+        notificationChannels.createNotificationChannels()
+
+        val notification = NotificationCompat.Builder(this, notificationChannels.CHANNEL_2)
+            .setSmallIcon(R.drawable.notification)
+            .setContentTitle("Order sent")
+            .setContentText("The order has been sent")
+            .setColor(Color.BLUE)
+            .build()
+
+        notificationManager.notify(2, notification)
     }
 }

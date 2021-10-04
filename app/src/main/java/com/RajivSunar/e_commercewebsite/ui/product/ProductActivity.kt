@@ -1,5 +1,6 @@
 package com.RajivSunar.e_commercewebsite.ui.product
 
+import android.R.attr
 import android.content.Intent
 import android.content.res.Resources
 import android.hardware.Sensor
@@ -32,6 +33,11 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.util.*
 import kotlin.collections.ArrayList
+import android.R.attr.y
+
+import android.R.attr.x
+import android.view.WindowManager
+
 
 class ProductActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener,
     SensorEventListener {
@@ -42,10 +48,18 @@ class ProductActivity : AppCompatActivity(), NavigationView.OnNavigationItemSele
 
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var mToggle: ActionBarDrawerToggle
-    private lateinit var navView : NavigationView
+    private lateinit var navView: NavigationView
 
     private lateinit var sensorManager: SensorManager
-    private var sensor: Sensor? = null
+    private var sensorGyro: Sensor? = null
+    private var sensorAcelero: Sensor? = null
+    private var sensorProxi: Sensor? = null
+    private var sensorLight: Sensor? = null
+
+    private val SHAKE_THRESHOLD = 3.25f // m/S**2
+
+    private val MIN_TIME_BETWEEN_SHAKES_MILLISECS = 1000
+    private var mLastShakeTime: Long = 0
 
     var width: Int? = null
 
@@ -58,15 +72,41 @@ class ProductActivity : AppCompatActivity(), NavigationView.OnNavigationItemSele
         drawerLayout = findViewById(R.id.drawerlayout)
         navView = findViewById(R.id.navView)
         mToggle = ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close)
+
+        //sensors
+
         sensorManager = getSystemService(SENSOR_SERVICE) as SensorManager
 
+//
 
-        if (!checkSensor())
-            return
+//         check gyroscope
+        if (!checkGyroscope())
         else {
-            sensor = sensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE)
-            sensorManager.registerListener(this, sensor, SensorManager.SENSOR_DELAY_NORMAL)
+            sensorGyro = sensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE)
+            sensorManager.registerListener(this, sensorGyro, SensorManager.SENSOR_DELAY_NORMAL)
         }
+
+
+        // check accelerometer
+        if (!checkAccelerometer())
+        else {
+            sensorAcelero = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
+            sensorManager.registerListener(this, sensorAcelero, SensorManager.SENSOR_DELAY_NORMAL)
+        }
+
+        if (!checkProximitySensor())
+        else {
+            sensorProxi = sensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY)
+            sensorManager.registerListener(this, sensorProxi, SensorManager.SENSOR_DELAY_NORMAL)
+        }
+
+        if (!checkLightSensor())
+        else {
+            sensorLight = sensorManager.getDefaultSensor(Sensor.TYPE_LIGHT)
+            sensorManager.registerListener(this, sensorLight, SensorManager.SENSOR_DELAY_NORMAL)
+        }
+
+
 
         drawerLayout.addDrawerListener(mToggle)
         mToggle.syncState()
@@ -75,10 +115,10 @@ class ProductActivity : AppCompatActivity(), NavigationView.OnNavigationItemSele
         navView.setNavigationItemSelectedListener(this)
         width = Resources.getSystem().getDisplayMetrics().widthPixels
 
-        if(ServiceBuilder.token != null){
+        if (ServiceBuilder.token != null) {
             navView.menu.findItem(R.id.nav_login).setVisible(false)
             navView.menu.findItem(R.id.nav_logout).setVisible(true)
-        }else{
+        } else {
             navView.menu.findItem(R.id.nav_login).setVisible(true)
             navView.menu.findItem(R.id.nav_logout).setVisible(false)
         }
@@ -89,23 +129,23 @@ class ProductActivity : AppCompatActivity(), NavigationView.OnNavigationItemSele
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if(mToggle.onOptionsItemSelected(item)){
+        if (mToggle.onOptionsItemSelected(item)) {
             return true
         }
         return false
     }
 
 
-    fun displayAll(){
+    fun displayAll() {
         CoroutineScope(Dispatchers.IO).launch {
             try {
 
                 val repository = ProductRepository()
                 val response = repository.getAll()
-                if(response.success == true){
-                    withContext(Dispatchers.Main){
-                        if(response.result?.size!! > 0){
-                            for(item in response.result!!){
+                if (response.success == true) {
+                    withContext(Dispatchers.Main) {
+                        if (response.result?.size!! > 0) {
+                            for (item in response.result!!) {
 
                                 var product = Product()
                                 product._id = item._id.toString()
@@ -122,10 +162,9 @@ class ProductActivity : AppCompatActivity(), NavigationView.OnNavigationItemSele
                         }
 
 
-
                         val adapter = ProductAdapter(productList, this@ProductActivity)
                         var spancount = 2
-                        if(width!! > 1700){
+                        if (width!! > 1700) {
                             spancount = 3
                         }
                         productRecyclerView.layoutManager =
@@ -136,8 +175,8 @@ class ProductActivity : AppCompatActivity(), NavigationView.OnNavigationItemSele
 
 
                 }
-            }catch(ex: Exception){
-                withContext(Dispatchers.Main){
+            } catch (ex: Exception) {
+                withContext(Dispatchers.Main) {
                     Toast.makeText(this@ProductActivity, ex.toString(), Toast.LENGTH_SHORT).show()
                 }
             }
@@ -145,44 +184,44 @@ class ProductActivity : AppCompatActivity(), NavigationView.OnNavigationItemSele
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        if(item.itemId == R.id.nav_cart){
+        if (item.itemId == R.id.nav_cart) {
             val intent = Intent(this, CartActivity::class.java)
             startActivity(
                 intent
             )
-        }else if(item.itemId == R.id.nav_login) {
+        } else if (item.itemId == R.id.nav_login) {
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(
                 intent
             )
-        }else if(item.itemId == R.id.nav_my_products) {
+        } else if (item.itemId == R.id.nav_my_products) {
             val intent = Intent(this, MyProductsActivity::class.java)
             startActivity(
                 intent
             )
-        }else if(item.itemId == R.id.nav_create_product) {
+        } else if (item.itemId == R.id.nav_create_product) {
             val intent = Intent(this, CreateProductActivity::class.java)
             startActivity(
                 intent
             )
-        }else if(item.itemId == R.id.nav_profile) {
+        } else if (item.itemId == R.id.nav_profile) {
             val intent = Intent(this, ProfileActivity::class.java)
             startActivity(
                 intent
             )
-        }else if(item.itemId == R.id.nav_exchange_request_buyer) {
+        } else if (item.itemId == R.id.nav_exchange_request_buyer) {
             val intent = Intent(this, ExchangeProductActivity::class.java)
             intent.putExtra("for", "user")
             startActivity(
                 intent
             )
-        }else if(item.itemId == R.id.nav_exchange_request_seller) {
+        } else if (item.itemId == R.id.nav_exchange_request_seller) {
             val intent = Intent(this, ExchangeProductActivity::class.java)
             intent.putExtra("for", "seller")
             startActivity(
                 intent
             )
-        }else if(item.itemId == R.id.nav_logout) {
+        } else if (item.itemId == R.id.nav_logout) {
             ServiceBuilder.token = null
             val intent = Intent(this, ProductActivity::class.java)
             startActivity(
@@ -192,16 +231,16 @@ class ProductActivity : AppCompatActivity(), NavigationView.OnNavigationItemSele
         return true
     }
 
-    fun login(){
+    fun login() {
         val preferences = getSharedPreferences("emailPasswordPref", MODE_PRIVATE)
         var token = preferences.getString("token", "")
 
-        if(token != ""){
+        if (token != "") {
             ServiceBuilder.token = token
         }
     }
 
-    private fun checkSensor(): Boolean {
+    private fun checkGyroscope(): Boolean {
         var flag = true
         if (sensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE) == null) {
             flag = false
@@ -209,13 +248,102 @@ class ProductActivity : AppCompatActivity(), NavigationView.OnNavigationItemSele
         return flag
     }
 
-    override fun onSensorChanged(event: SensorEvent?) {
-        val values = event!!.values[1]
-        if (values < 0)
-            drawerLayout.closeDrawer(Gravity.LEFT)
-        else if (values > 0)
-            drawerLayout.openDrawer(Gravity.LEFT)
+    private fun checkAccelerometer(): Boolean {
+        var flag = true
+        if (sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER) == null) {
+            flag = false
+        }
+        return flag
+    }
 
+    private fun checkProximitySensor(): Boolean {
+        var flag = true
+        if (sensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY) == null) {
+            flag = false
+        }
+        return flag
+    }
+
+    private fun checkLightSensor(): Boolean {
+        var flag = true
+        if (sensorManager.getDefaultSensor(Sensor.TYPE_LIGHT) == null) {
+            flag = false
+        }
+        return flag
+    }
+
+
+    override fun onSensorChanged(event: SensorEvent?) {
+        if (event!!.sensor.type == Sensor.TYPE_ACCELEROMETER) {
+            val curTime = System.currentTimeMillis()
+            if (curTime - mLastShakeTime > MIN_TIME_BETWEEN_SHAKES_MILLISECS) {
+                val x = event!!.values[0]
+                val y = event.values[1]
+                val z = event.values[2]
+                val acceleration = Math.sqrt(
+                    Math.pow(x.toDouble(), 2.0) +
+                            Math.pow(y.toDouble(), 2.0) +
+                            Math.pow(z.toDouble(), 2.0)
+                ) - SensorManager.GRAVITY_EARTH
+
+
+                if (acceleration > SHAKE_THRESHOLD) {
+                    mLastShakeTime = curTime
+
+                    if (ServiceBuilder.token != null) {
+                        ServiceBuilder.token = null
+                        Toast.makeText(this, "Logout successul", Toast.LENGTH_SHORT).show()
+                        val intent = Intent(this, ProductActivity::class.java)
+                        startActivity(
+                            intent
+                        )
+                    }
+
+                }
+            }
+        } else if (event!!.sensor.type == Sensor.TYPE_GYROSCOPE) {
+            val values = event!!.values[1]
+            if (values < -1)
+                drawerLayout.closeDrawer(Gravity.LEFT)
+            else if (values > 1)
+                drawerLayout.openDrawer(Gravity.LEFT)
+        } else if (event!!.sensor.type == Sensor.TYPE_PROXIMITY) {
+            val values = event!!.values[0]
+
+            val params = this.window.attributes
+
+            if (values <= 4) {
+                params.flags = WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE
+                params.screenBrightness = 0.1f
+                this.window.attributes = params
+            } else{
+                params.flags = WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON
+                params.screenBrightness = 0.9f
+                this.window.attributes = params
+                this.window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
+            }
+
+        }else if (event!!.sensor.type == Sensor.TYPE_LIGHT) {
+            val values = event!!.values[0]
+
+            val params = this.window.attributes
+
+            if (values <= 50) {
+                params.flags = WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON
+                params.screenBrightness = 0.2f
+                this.window.attributes = params
+            } else if (values >= 50 && values < 5000 ) {
+                params.flags = WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON
+                params.screenBrightness = 0.6f
+                this.window.attributes = params
+            } else if(values > 5000){
+                params.flags = WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON
+                params.screenBrightness = 0.9f
+                this.window.attributes = params
+                this.window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
+            }
+
+        }
     }
 
 

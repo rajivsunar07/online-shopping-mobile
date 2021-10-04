@@ -2,6 +2,8 @@ package com.RajivSunar.e_commercewebsite.ui.adapter
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
+import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,7 +11,11 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.annotation.RequiresApi
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.RajivSunar.e_commercewebsite.NotificationChannel
 import com.RajivSunar.e_commercewebsite.R
 import com.RajivSunar.e_commercewebsite.data.api.ServiceBuilder
 import com.RajivSunar.e_commercewebsite.data.entity.Product
@@ -74,6 +80,7 @@ class ProductAdapter(
                         )
                         if(response.success == true){
                             withContext(Dispatchers.Main){
+                                loadNotification()
                                 Toast.makeText(context, response.message, Toast.LENGTH_SHORT).show()
                             }
                         }
@@ -86,6 +93,22 @@ class ProductAdapter(
             }
         }
 
+    }
+
+    fun loadNotification() {
+        val notificationManager = NotificationManagerCompat.from(context.applicationContext)
+
+        val notificationChannels = NotificationChannel(context.applicationContext)
+        notificationChannels.createNotificationChannels()
+
+        val notification = NotificationCompat.Builder(context.applicationContext, notificationChannels.CHANNEL_2)
+            .setSmallIcon(R.drawable.notification)
+            .setContentTitle("Added to cart")
+            .setContentText("The product has been added to cart")
+            .setColor(Color.BLUE)
+            .build()
+
+        notificationManager.notify(2, notification)
     }
 
 
