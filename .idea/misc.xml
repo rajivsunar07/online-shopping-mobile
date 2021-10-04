@@ -5,8 +5,12 @@
       <map>
         <entry key="app/src/main/res/drawable/border.xml" value="0.2851851851851852" />
         <entry key="app/src/main/res/drawable/ic_arrow_up.xml" value="0.1925925925925926" />
+        <entry key="app/src/main/res/drawable/ic_baseline_account_circle_24.xml" value="0.22777777777777777" />
+        <entry key="app/src/main/res/drawable/ic_baseline_add_shopping_cart_24.xml" value="0.22777777777777777" />
+        <entry key="app/src/main/res/drawable/ic_baseline_arrow_drop_down_24.xml" value="0.22777777777777777" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.165625" />
         <entry key="app/src/main/res/drawable/layout_bg.xml" value="0.2851851851851852" />
+        <entry key="app/src/main/res/drawable/notification.xml" value="0.22777777777777777" />
         <entry key="app/src/main/res/drawable/side_nav_bar.xml" value="0.16875" />
         <entry key="app/src/main/res/layout-sw600dp/design_product.xml" value="0.21171875" />
         <entry key="app/src/main/res/layout/activity_cart.xml" value="0.335" />
@@ -26,6 +30,7 @@
         <entry key="app/src/main/res/layout/activity_profile.xml" value="0.28229166666666666" />
         <entry key="app/src/main/res/layout/activity_profile_update.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_signup.xml" value="0.2462962962962963" />
+        <entry key="app/src/main/res/layout/activity_test.xml" value="0.28229166666666666" />
         <entry key="app/src/main/res/layout/activity_update_product.xml" value="0.28229166666666666" />
         <entry key="app/src/main/res/layout/cart_design.xml" value="0.335" />
         <entry key="app/src/main/res/layout/content_cart.xml" value="0.28229166666666666" />
@@ -40,6 +45,8 @@
         <entry key="app/src/main/res/menu/activity_main_drawer.xml" value="0.28229166666666666" />
         <entry key="app/src/main/res/menu/nav.xml" value="0.28229166666666666" />
         <entry key="app/src/main/res/menu/navigation_menu.xml" value="0.28229166666666666" />
+        <entry key="hamroshopwear/src/main/res/layout/activity_dashboard.xml" value="0.8285714285714286" />
+        <entry key="hamroshopwear/src/main/res/layout/activity_login.xml" value="0.75" />
       </map>
     </option>
   </component>

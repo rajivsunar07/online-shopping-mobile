@@ -4,6 +4,7 @@ package com.RajivSunar.e_commercewebsite.ui
 import android.view.View
 import android.view.ViewGroup
 import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.UiController
 import androidx.test.espresso.action.ViewActions.*
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.*
@@ -18,6 +19,12 @@ import org.hamcrest.TypeSafeMatcher
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import androidx.test.espresso.matcher.ViewMatchers
+
+import androidx.test.espresso.ViewAction
+
+
+
 
 @LargeTest
 @RunWith(AndroidJUnit4::class)
@@ -27,8 +34,25 @@ class SignUpTest {
     @JvmField
     var mActivityTestRule = ActivityTestRule(MainActivity::class.java)
 
+    fun waitFor(delay: Long): ViewAction? {
+        return object : ViewAction {
+            override fun getConstraints(): Matcher<View> {
+                return isRoot()
+            }
+
+            override fun getDescription(): String {
+                return "wait for " + delay + "milliseconds"
+            }
+
+            override fun perform(uiController: UiController, view: View?) {
+                uiController.loopMainThreadForAtLeast(delay)
+            }
+        }
+    }
+
     @Test
     fun signUpTest() {
+        onView(isRoot()).perform(waitFor(5000));
         val appCompatImageButton = onView(
             allOf(
                 withContentDescription("Open"),
@@ -93,7 +117,7 @@ class SignUpTest {
                 isDisplayed()
             )
         )
-        appCompatEditText.perform(replaceText("test@test.com"), closeSoftKeyboard())
+        appCompatEditText.perform(replaceText("imptest@test.com"), closeSoftKeyboard())
 
         val appCompatEditText2 = onView(
             allOf(

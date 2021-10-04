@@ -57,7 +57,6 @@ class MyProductsActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
 
 
         if (!checkSensor())
-            return
         else {
             sensor = sensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE)
             sensorManager.registerListener(this, sensor, SensorManager.SENSOR_DELAY_NORMAL)
