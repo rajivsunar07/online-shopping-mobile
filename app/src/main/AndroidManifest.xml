@@ -7,6 +7,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <application
         android:allowBackup="true"
@@ -16,8 +17,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.EcommerceWebsite"
-        android:windowSoftInputMode="adjustPan"
-        android:usesCleartextTraffic="true">
+        android:usesCleartextTraffic="true"
+        android:windowSoftInputMode="adjustPan">
         <activity
             android:name=".ui.exchangeproduct.ExchangeProductActivity"
             android:exported="true" />
@@ -33,9 +34,7 @@
         <activity
             android:name=".ui.user.ProfileActivity"
             android:exported="true" />
-        <activity
-            android:name=".ui.product.UpdateProductActivity"
-            android:exported="true" />
+
         <activity
             android:name=".ui.product.ProductDetailActivity"
             android:exported="true" />
@@ -52,7 +51,7 @@
             android:name=".ui.order.CartActivity"
             android:label="@string/title_activity_cart" />
         <activity android:name=".ui.user.LoginActivity" />
-        <activity android:name=".ui.DashboardActivity" />
+
         <activity android:name=".ui.product.ProductActivity" />
         <activity android:name=".ui.user.SignupActivity" />
         <activity android:name=".ui.MainActivity">
